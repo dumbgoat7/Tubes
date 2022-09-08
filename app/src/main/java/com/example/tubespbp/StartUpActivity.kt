@@ -28,7 +28,7 @@ class StartUpActivity: AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed( {
             startActivity(moveHome)
             finish()
-        }, 4000)
+        }, 3000)
 
     }
 }
