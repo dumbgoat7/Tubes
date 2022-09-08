@@ -2,32 +2,123 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imageview"
-        android:layout_width="159dp"
-        android:layout_height="169dp"
-        android:layout_marginTop="237dp"
+        android:layout_width="41dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        style="@style/TextAppearance.MaterialComponents.Headline3"
+        android:id="@+id/textView1"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="27dp"
+        android:text="Daftar"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/imageview"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageview" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="349dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="27dp"
+        android:alpha="0.5"
+        android:text="Daftar Sekarang dan Cek Status Kesehatanmu Bersama Kami"
+        android:textColor="@color/black"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toEndOf="@id/textView1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView1" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etNama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Aplikasi"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.134"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageview"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.362" />
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.134"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNama" />
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etNoHp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Nomor Hp"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.134"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etProgramStudi"
+        app:layout_constraintVertical_bias="0.626" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        app:errorEnabled="true"
+        app:passwordToggleEnabled="true"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="444dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginEnd="175dp"
+            android:inputType="textPassword"
+            tools:layout_editor_absoluteX="25dp"
+            tools:layout_editor_absoluteY="445dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
