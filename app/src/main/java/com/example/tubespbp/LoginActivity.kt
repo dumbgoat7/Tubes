@@ -1,9 +1,11 @@
 package com.example.tubespbp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.textfield.TextInputLayout
 
@@ -19,13 +21,13 @@ class LoginActivity : AppCompatActivity() {
 
         inputUsername = findViewById(R.id.inputLayoutUsername)
         inputPassword = findViewById(R.id.inputLayoutPassword)
-//        val textDaftar: TextView = findViewById(R.id.Textdaftar)
+        val textDaftar: TextView = findViewById(R.id.Textdaftar)
         val btnLogin: Button = findViewById(R.id.btnLogin)
 
-//        textDaftar.setOnClickListener(View.OnClickListener {
-//            val moveHome = Intent(this@LoginActivity, RegisterActivity::class.java)
-//            startActivity(moveHome)
-//        })
+        textDaftar.setOnClickListener(View.OnClickListener {
+            val moveHome = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(moveHome)
+        })
 
         btnLogin.setOnClickListener(View.OnClickListener {
             var checkLogin = false
@@ -42,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
                 checkLogin = false
             }
 
-            if (username == "admin" && password == "0914") checkLogin = true
+            if (username == "admin" && password == "xxxx") checkLogin = true
             if (!checkLogin) return@OnClickListener
 //            val moveHome = Intent(this@LoginActivity, HomeActivity::class.java)
 //            startActivity(moveHome)
