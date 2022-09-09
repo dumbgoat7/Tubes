@@ -41,9 +41,8 @@ class RegisterActivity : AppCompatActivity() {
             mBundle.putString("password" , password.editText.toString())
             Snackbar.make(registerActivity, "Akun Berhasil dibuat!", Snackbar.LENGTH_LONG).show()
 
-            val moveLogin = Intent(this@RegisterActivity, LoginActivity::class.java)
             intent.putExtra("register",mBundle)
-            startActivity(moveLogin)
+            startActivity(intent)
         }
 
     }

@@ -1,5 +1,6 @@
 package com.example.tubespbp
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,62 +16,76 @@ import java.util.ResourceBundle.getBundle
 class LoginActivity : AppCompatActivity() {
     private lateinit var inputUsername: TextInputLayout
     private lateinit var inputPassword: TextInputLayout
+    private lateinit var loginActivity: ConstraintLayout
     private lateinit var mBundle : Bundle
-    private lateinit var username : String
-    private lateinit var password : String
+    private lateinit var regUser : String
+    private lateinit var regPass : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
-//        getBundle()
-
 
         inputUsername = findViewById(R.id.inputLayoutUsername)
-//        inputUsername.editText?.setText(username)
-
         inputPassword = findViewById(R.id.inputLayoutPassword)
-//        inputPassword.editText?.setText(password)
+        inputUsername.editText?.setText("")
+        regUser = ""
+        inputPassword.editText?.setText("")
+        regPass = ""
+        loginActivity = findViewById(R.id.loginactivity)
+
+        if(intent.getBundleExtra("register")!=null){
+
+            getBundle()
+            inputUsername.editText?.setText(regUser)
+            inputPassword.editText?.setText(regPass)
+        }
 
         val textDaftar: TextView = findViewById(R.id.Textdaftar)
         val btnLogin: Button = findViewById(R.id.btnLogin)
+
+        btnLogin.setOnClickListener(View.OnClickListener {
+            if(!regUser.isEmpty() && !regPass.isEmpty()){
+                var checkLogin = false
+                val username: String = inputUsername.getEditText()?.getText().toString()
+                val password: String = inputPassword.getEditText()?.getText().toString()
+
+                if (username.isEmpty() && password.isEmpty()) {
+                    inputUsername.setError("Username must be filled with text")
+                    inputPassword.setError("Password must be filled with text")
+                    var checkLogin = false
+                } else {
+                    checkLogin = true
+                }
+                if (!checkLogin) return@OnClickListener
+//            val moveHome = Intent(this@LoginActivity, HomeActivity::class.java)
+//            startActivity(moveHome)
+            } else {
+                dialogBuilder()
+            }
+
+        })
 
         textDaftar.setOnClickListener(View.OnClickListener {
             val moveHome = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(moveHome)
         })
 
-        btnLogin.setOnClickListener(View.OnClickListener {
-            var checkLogin = false
-
-            if (inputUsername.isEmpty()) {
-                inputUsername.setError("Username must be filled with text")
-                checkLogin = false
-            }
-
-            if (inputPassword.isEmpty()) {
-                inputPassword.setError("Password must be filled with text")
-                checkLogin = false
-            }
-
-            if (username == "raxx" && password == "xxxx") checkLogin = true
-//            if (!checkLogin) return@OnClickListener
-//            val moveHome = Intent(this@LoginActivity, HomeActivity::class.java)
-//            startActivity(moveHome)
-        })
-//        fun alertDialog(val username: String, val password: String){
-//            val builder = AlertDialog.Builder(this)
-//
-//
-//        }
-
-
-
     }
+        fun dialogBuilder(){
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("ALERT")
+            builder.setMessage("Please register yourself!")
+            builder.setPositiveButton("OK", DialogInterface.OnClickListener{
+                    dialog, id -> loginActivity
+            })
+            builder.show()
+
+        }
         fun getBundle() {
             mBundle = intent.getBundleExtra("register")!!
 
-            username = mBundle.getString("username")!!
-            password = mBundle.getString("password")!!
+            regUser = mBundle.getString("username")!!
+            regPass = mBundle.getString("password")!!
         }
 }

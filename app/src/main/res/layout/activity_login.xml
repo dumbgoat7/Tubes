@@ -72,6 +72,7 @@
             app:startIconDrawable="@drawable/ic_user_24">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -91,6 +92,7 @@
             app:startIconDrawable="@drawable/ic_lock_24">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
