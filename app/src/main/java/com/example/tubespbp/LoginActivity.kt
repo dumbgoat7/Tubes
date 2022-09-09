@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.textfield.TextInputLayout
 
@@ -18,8 +19,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
 
-        inputUsername = findViewById(R.id.inputLayoutUsername)
-        inputPassword = findViewById(R.id.inputLayoutPassword)
+//        inputUsername = findViewById(R.id.inputLayoutUsername)
+//        inputPassword = findViewById(R.id.inputLayoutPassword)
         val textDaftar: TextView = findViewById(R.id.Textdaftar)
         val btnLogin: Button = findViewById(R.id.btnLogin)
 
@@ -30,8 +31,12 @@ class LoginActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener(View.OnClickListener {
             var checkLogin = false
-            val username: String = inputUsername.getEditText()?.getText().toString()
-            val password: String = inputPassword.getEditText()?.getText().toString()
+            val bundle = intent.extras
+            val username: String = bundle!!.getString("username","")
+            val password: String = bundle!!.getString("password","")
+
+
+//            inputUsername?.setText(!!)
 
             if (username.isEmpty()) {
                 inputUsername.setError("Username must be filled with text")
@@ -48,6 +53,11 @@ class LoginActivity : AppCompatActivity() {
 //            val moveHome = Intent(this@LoginActivity, HomeActivity::class.java)
 //            startActivity(moveHome)
         })
+//        fun alertDialog(val username: String, val password: String){
+//            val builder = AlertDialog.Builder(this)
+//
+//
+//        }
 
 
     }

@@ -32,10 +32,6 @@ class RegisterActivity : AppCompatActivity() {
         val btnRegister: Button = findViewById(R.id.btnRegister)
 
         btnRegister.setOnClickListener{
-            Snackbar.make(registerActivity, "Akun Berhasil dibuat!", Snackbar.LENGTH_LONG).show()
-        }
-
-        btnRegister.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             val mBundle = Bundle()
 
@@ -43,8 +39,10 @@ class RegisterActivity : AppCompatActivity() {
             mBundle.putString("email" , email.editText.toString())
             mBundle.putString("noHp" , noHp.editText.toString())
             mBundle.putString("password" , password.editText.toString())
+            Snackbar.make(registerActivity, "Akun Berhasil dibuat!", Snackbar.LENGTH_LONG).show()
 
             val moveLogin = Intent(this@RegisterActivity, LoginActivity::class.java)
+            intent.putExtras(mBundle)
             startActivity(moveLogin)
         }
 
