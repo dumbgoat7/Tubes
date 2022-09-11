@@ -13,6 +13,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var inputUsername : TextInputLayout
     private lateinit var inputEmail : TextInputLayout
+    private lateinit var inputTanggalLahir : TextInputLayout
     private lateinit var inputNoHp : TextInputLayout
     private lateinit var inputPassword : TextInputLayout
     private lateinit var registerActivity: ConstraintLayout
@@ -25,6 +26,7 @@ class RegisterActivity : AppCompatActivity() {
 
         inputUsername = findViewById(R.id.layoutUsername)
         inputEmail = findViewById(R.id.layoutEmail)
+        inputTanggalLahir = findViewById(R.id.layoutTanggalLahir)
         inputNoHp = findViewById(R.id.layoutNoHp)
         inputPassword = findViewById(R.id.layoutPassword)
         registerActivity = findViewById(R.id.registerActivity)
@@ -34,6 +36,7 @@ class RegisterActivity : AppCompatActivity() {
             var checkRegister = true
             val username: String = inputUsername.getEditText()?.getText().toString()
             val email: String = inputEmail.getEditText()?.getText().toString()
+            val tanggalLahir: String = inputTanggalLahir.getEditText()?.getText().toString()
             val noHp: String = inputNoHp.getEditText()?.getText().toString()
             val password: String = inputPassword.getEditText()?.getText().toString()
 
@@ -44,6 +47,11 @@ class RegisterActivity : AppCompatActivity() {
 
             if (email.isEmpty()){
                 inputEmail.setError("Email must be filled with text")
+                checkRegister = false
+            }
+
+            if (tanggalLahir.isEmpty()){
+                inputTanggalLahir.setError("Tanggal lahir must be filled with text")
                 checkRegister = false
             }
 
@@ -64,6 +72,7 @@ class RegisterActivity : AppCompatActivity() {
 
             mBundle.putString("username" , inputUsername.getEditText()?.getText().toString())
             mBundle.putString("email" , inputEmail.getEditText()?.getText().toString())
+            mBundle.putString("tanggal Lahir" , inputTanggalLahir.getEditText()?.getText().toString())
             mBundle.putString("noHp" , inputNoHp.getEditText()?.getText().toString())
             mBundle.putString("password" , inputPassword.getEditText()?.getText().toString())
             Snackbar.make(registerActivity, "Akun Berhasil dibuat!", Snackbar.LENGTH_LONG).show()
