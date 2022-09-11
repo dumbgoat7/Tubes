@@ -3,6 +3,7 @@ package com.example.tubespbp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
@@ -32,7 +33,7 @@ class RegisterActivity : AppCompatActivity() {
         registerActivity = findViewById(R.id.registerActivity)
         val btnRegister: Button = findViewById(R.id.btnRegister)
 
-        btnRegister.setOnClickListener{
+        btnRegister.setOnClickListener(View.OnClickListener{
             var checkRegister = true
             val username: String = inputUsername.getEditText()?.getText().toString()
             val email: String = inputEmail.getEditText()?.getText().toString()
@@ -64,7 +65,11 @@ class RegisterActivity : AppCompatActivity() {
                 inputPassword.setError("Password must be filled with text")
                 checkRegister = false
             }
-        }
+
+            if(!checkRegister)return@OnClickListener
+            val moveLogin = Intent(this@RegisterActivity, LoginActivity::class.java)
+            startActivity(moveLogin)
+        })
 
         btnRegister.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
