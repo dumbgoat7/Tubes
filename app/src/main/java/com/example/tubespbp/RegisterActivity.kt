@@ -34,6 +34,9 @@ class RegisterActivity : AppCompatActivity() {
         val btnRegister: Button = findViewById(R.id.btnRegister)
 
         btnRegister.setOnClickListener(View.OnClickListener{
+            val intent = Intent(this, LoginActivity::class.java)
+            val mBundle = Bundle()
+
             var checkRegister = true
             val username: String = inputUsername.getEditText()?.getText().toString()
             val email: String = inputEmail.getEditText()?.getText().toString()
@@ -69,11 +72,6 @@ class RegisterActivity : AppCompatActivity() {
             if(!checkRegister)return@OnClickListener
             val moveLogin = Intent(this@RegisterActivity, LoginActivity::class.java)
             startActivity(moveLogin)
-        })
-
-        btnRegister.setOnClickListener{
-            val intent = Intent(this, LoginActivity::class.java)
-            val mBundle = Bundle()
 
             mBundle.putString("username" , inputUsername.getEditText()?.getText().toString())
             mBundle.putString("email" , inputEmail.getEditText()?.getText().toString())
@@ -84,7 +82,6 @@ class RegisterActivity : AppCompatActivity() {
 
             intent.putExtra("register",mBundle)
             startActivity(intent)
-        }
-
+        })
     }
 }
