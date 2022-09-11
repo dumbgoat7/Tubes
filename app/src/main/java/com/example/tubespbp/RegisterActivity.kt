@@ -62,10 +62,10 @@ class RegisterActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             val mBundle = Bundle()
 
-            mBundle.putString("username" , inputUsername.editText.toString())
-            mBundle.putString("email" , inputEmail.editText.toString())
-            mBundle.putString("noHp" , inputNoHp.editText.toString())
-            mBundle.putString("password" , inputPassword.editText.toString())
+            mBundle.putString("username" , inputUsername.getEditText()?.getText().toString())
+            mBundle.putString("email" , inputEmail.getEditText()?.getText().toString())
+            mBundle.putString("noHp" , inputNoHp.getEditText()?.getText().toString())
+            mBundle.putString("password" , inputPassword.getEditText()?.getText().toString())
             Snackbar.make(registerActivity, "Akun Berhasil dibuat!", Snackbar.LENGTH_LONG).show()
 
             intent.putExtra("register",mBundle)
