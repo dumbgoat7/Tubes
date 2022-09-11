@@ -11,10 +11,10 @@ import com.google.android.material.textfield.TextInputLayout
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var username : TextInputLayout
-    private lateinit var email : TextInputLayout
-    private lateinit var noHp : TextInputLayout
-    private lateinit var password : TextInputLayout
+    private lateinit var inputUsername : TextInputLayout
+    private lateinit var inputEmail : TextInputLayout
+    private lateinit var inputNoHp : TextInputLayout
+    private lateinit var inputPassword : TextInputLayout
     private lateinit var registerActivity: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,22 +23,49 @@ class RegisterActivity : AppCompatActivity() {
 
         setTitle("Daftar")
 
-        username = findViewById(R.id.layoutUsername)
-        email = findViewById(R.id.layoutEmail)
-        noHp = findViewById(R.id.layoutNoHp)
-        password = findViewById(R.id.layoutPassword)
+        inputUsername = findViewById(R.id.layoutUsername)
+        inputEmail = findViewById(R.id.layoutEmail)
+        inputNoHp = findViewById(R.id.layoutNoHp)
+        inputPassword = findViewById(R.id.layoutPassword)
         registerActivity = findViewById(R.id.registerActivity)
-
         val btnRegister: Button = findViewById(R.id.btnRegister)
+
+        btnRegister.setOnClickListener{
+            var checkRegister = true
+            val username: String = inputUsername.getEditText()?.getText().toString()
+            val email: String = inputEmail.getEditText()?.getText().toString()
+            val noHp: String = inputNoHp.getEditText()?.getText().toString()
+            val password: String = inputPassword.getEditText()?.getText().toString()
+
+            if (username.isEmpty()){
+                inputUsername.setError("Username must be filled with text")
+                checkRegister = false
+            }
+
+            if (email.isEmpty()){
+                inputEmail.setError("Email must be filled with text")
+                checkRegister = false
+            }
+
+            if (noHp.isEmpty()){
+                inputNoHp.setError("Nomor Hp must be filled with text")
+                checkRegister = false
+            }
+
+            if (password.isEmpty()){
+                inputPassword.setError("Password must be filled with text")
+                checkRegister = false
+            }
+        }
 
         btnRegister.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             val mBundle = Bundle()
 
-            mBundle.putString("username" , username.getEditText()?.getText().toString())
-            mBundle.putString("email" , email.getEditText()?.getText().toString())
-            mBundle.putString("noHp" , noHp.getEditText()?.getText().toString())
-            mBundle.putString("password" , password.getEditText()?.getText().toString())
+            mBundle.putString("username" , inputUsername.editText.toString())
+            mBundle.putString("email" , inputEmail.editText.toString())
+            mBundle.putString("noHp" , inputNoHp.editText.toString())
+            mBundle.putString("password" , inputPassword.editText.toString())
             Snackbar.make(registerActivity, "Akun Berhasil dibuat!", Snackbar.LENGTH_LONG).show()
 
             intent.putExtra("register",mBundle)
