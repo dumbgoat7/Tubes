@@ -53,12 +53,16 @@ class LoginActivity : AppCompatActivity() {
                     inputUsername.setError("Username must be filled with text")
                     inputPassword.setError("Password must be filled with text")
                     var checkLogin = false
-                } else {
+                } else if(password.length < 8){
+                    inputPassword.setError("Password should more than contain 8 character")
+                } else{
                     checkLogin = true
                 }
                 if (!checkLogin) return@OnClickListener
-//            val moveHome = Intent(this@LoginActivity, HomeActivity::class.java)
-//            startActivity(moveHome)
+
+            val moveHome = Intent(this@LoginActivity, HomeActivity::class.java)
+                finish()
+                startActivity(moveHome)
             } else {
                 dialogBuilder()
             }
@@ -66,8 +70,8 @@ class LoginActivity : AppCompatActivity() {
         })
 
         textDaftar.setOnClickListener(View.OnClickListener {
-            val moveHome = Intent(this@LoginActivity, RegisterActivity::class.java)
-            startActivity(moveHome)
+            val moveReg = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(moveReg)
         })
 
     }

@@ -32,5 +32,6 @@ class RVRumahSakitAdapter(private val data:Array<RumahSakit>) : RecyclerView.Ada
         val tvNotelp  : TextView = itemView.findViewById(R.id.tv_noTelp)
         val ivgambar : ImageView = itemView.findViewById(R.id.iv_gambar)
 
+
     }
 }
