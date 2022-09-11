@@ -26,27 +26,26 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
 
+        val textDaftar: TextView = findViewById(R.id.Textdaftar)
+        val btnLogin: Button = findViewById(R.id.btnLogin)
         inputUsername = findViewById(R.id.inputLayoutUsername)
         inputPassword = findViewById(R.id.inputLayoutPassword)
         inputUsername.editText?.setText("")
-        regUser = ""
         inputPassword.editText?.setText("")
+        regUser = ""
         regPass = ""
         loginActivity = findViewById(R.id.loginactivity)
 
         if(intent.getBundleExtra("register")!=null){
 
             getBundle()
-            inputUsername.editText?.setText(regUser)
-            inputPassword.editText?.setText(regPass)
+            setText()
         }
 
-        val textDaftar: TextView = findViewById(R.id.Textdaftar)
-        val btnLogin: Button = findViewById(R.id.btnLogin)
-
         btnLogin.setOnClickListener(View.OnClickListener {
+            var checkLogin = false
             if(!regUser.isEmpty() && !regPass.isEmpty()){
-                var checkLogin = false
+
                 val username: String = inputUsername.getEditText()?.getText().toString()
                 val password: String = inputPassword.getEditText()?.getText().toString()
 
@@ -87,5 +86,9 @@ class LoginActivity : AppCompatActivity() {
 
             regUser = mBundle.getString("username")!!
             regPass = mBundle.getString("password")!!
+        }
+        fun setText() {
+            inputUsername.getEditText()?.setText(regUser)
+            inputPassword.getEditText()?.setText(regPass)
         }
 }
