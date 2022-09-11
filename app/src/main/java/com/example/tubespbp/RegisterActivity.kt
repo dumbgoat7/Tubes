@@ -31,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
         val btnRegister: Button = findViewById(R.id.btnRegister)
 
         btnRegister.setOnClickListener{
-            var checkRegister = false
+            var checkRegister = true
             val username: String = inputUsername.getEditText()?.getText().toString()
             val email: String = inputEmail.getEditText()?.getText().toString()
             val noHp: String = inputNoHp.getEditText()?.getText().toString()
