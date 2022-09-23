@@ -7,14 +7,15 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [User::class],
-    version = 1
+    version = 1,
 )
 
 abstract class UserDB: RoomDatabase() {
     abstract fun UserDao() : UserDao
 
     companion object {
-        @Volatile private var instance : UserDB? = null
+        @Volatile
+        private var instance : UserDB? = null
         private val LOCK = Any()
 
         operator fun invoke(context: Context) = instance ?:
@@ -28,6 +29,6 @@ abstract class UserDB: RoomDatabase() {
             context.applicationContext,
             UserDB::class.java,
             "user12345.db"
-        ).build()
+        ).allowMainThreadQueries().build()
     }
 }

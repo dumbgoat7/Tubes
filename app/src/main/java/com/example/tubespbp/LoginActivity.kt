@@ -12,14 +12,20 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isEmpty
 import com.google.android.material.textfield.TextInputLayout
 import java.util.ResourceBundle.getBundle
+import android.provider.ContactsContract
+import com.google.android.material.snackbar.Snackbar
+import com.example.tubespbp.room.User
+import com.example.tubespbp.room.UserDB
+
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var inputUsername: TextInputLayout
     private lateinit var inputPassword: TextInputLayout
     private lateinit var loginActivity: ConstraintLayout
     private lateinit var mBundle : Bundle
-    private lateinit var regUser : String
-    private lateinit var regPass : String
+
+    lateinit var regUser : String
+    lateinit var regPass : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,20 +36,15 @@ class LoginActivity : AppCompatActivity() {
         val btnLogin: Button = findViewById(R.id.btnLogin)
         inputUsername = findViewById(R.id.inputLayoutUsername)
         inputPassword = findViewById(R.id.inputLayoutPassword)
-        inputUsername.editText?.setText("")
-        inputPassword.editText?.setText("")
-        regUser = ""
-        regPass = ""
         loginActivity = findViewById(R.id.loginactivity)
 
-        if(intent.getBundleExtra("register")!=null){
-
-            getBundle()
-            setText()
+        textDaftar.setOnClickListener{
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
 
         btnLogin.setOnClickListener(View.OnClickListener {
-            var checkLogin = false
+            var checkLogin = true
             if(!regUser.isEmpty() && !regPass.isEmpty()){
 
                 val username: String = inputUsername.getEditText()?.getText().toString()
@@ -85,14 +86,13 @@ class LoginActivity : AppCompatActivity() {
             builder.show()
 
         }
-        fun getBundle() {
-            mBundle = intent.getBundleExtra("register")!!
-
-            regUser = mBundle.getString("username")!!
-            regPass = mBundle.getString("password")!!
-        }
         fun setText() {
             inputUsername.getEditText()?.setText(regUser)
             inputPassword.getEditText()?.setText(regPass)
         }
+        fun getBundle() {
+        mBundle = intent.getBundleExtra("register")!!
+        regUser = mBundle.getString("username")!!
+        regPass = mBundle.getString("password")!!
+    }
 }
