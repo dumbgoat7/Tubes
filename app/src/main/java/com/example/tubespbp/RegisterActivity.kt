@@ -2,24 +2,13 @@ package com.example.tubespbp
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.appcompat.app.AppCompatActivity
 import com.example.tubespbp.databinding.ActivityRegisterBinding
 import com.example.tubespbp.room.User
 import com.example.tubespbp.room.UserDB
-import com.example.tubespbp.room.UserDao
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import java.util.*
-import android.text.method.LinkMovementMethod
-import android.widget.TextView
-import com.google.android.material.datepicker.MaterialDatePicker
-import javax.xml.datatype.DatatypeConstants.MONTHS
 
 class RegisterActivity : AppCompatActivity() {
     val db by lazy { UserDB(this) }
@@ -27,7 +16,6 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
 
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         val view = binding.root
@@ -35,11 +23,11 @@ class RegisterActivity : AppCompatActivity() {
 
         setTitle("Daftar")
 
-        binding.layoutTanggalLahir.setOnClickListener{
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
+        binding.etTglLahir.setOnClickListener{
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
 
             val datePicker = DatePickerDialog(
                 this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
@@ -54,7 +42,7 @@ class RegisterActivity : AppCompatActivity() {
 
             val username: String = binding.layoutUsername.editText?.getText().toString()
             val email: String = binding.layoutEmail.editText?.getText().toString()
-            val tanggalLahir: String = binding.layoutTanggalLahir.editText?.getText().toString()
+            val tanggalLahir: String = binding.etTglLahir.getText().toString()
             val noHp: String = binding.layoutNoHp.editText?.getText().toString()
             val password: String = binding.layoutPassword.editText?.getText().toString()
 
@@ -71,12 +59,12 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             if (!email.matches(Regex("[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"))) {
-                binding.etEmail.setError("Email Invalid")
+                binding.layoutEmail.setError("Email Invalid")
                 checkRegister = false
             }
 
             if (tanggalLahir.isEmpty()){
-                binding.layoutTanggalLahir.setError("Tanggal lahir must be filled with text")
+                binding.etTglLahir.setError("Tanggal lahir must be filled with text")
                 checkRegister = false
             }
 
@@ -94,13 +82,15 @@ class RegisterActivity : AppCompatActivity() {
                 binding.layoutPassword.setError("Password must be filled with text")
                 checkRegister = false
             }
+            if (password.length !=8){
+                binding.etPass.setError("Password should more than contain 8 character")
+                checkRegister = false
+            }
 
             if(checkRegister == true) {
-                val db by lazy { UserDB(this)}
-                val userDao = db.UserDao()
 
                 val user = User(0, username, email, tanggalLahir, noHp, password)
-                userDao.addUser(user)
+                db.UserDao().addUser(user)
 
                 val moveLogin = Intent(this, LoginActivity::class.java)
                 val bundle: Bundle = Bundle()
