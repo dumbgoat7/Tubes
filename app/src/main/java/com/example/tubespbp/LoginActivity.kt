@@ -15,7 +15,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isEmpty
 import com.example.tubespbp.room.User
 import com.example.tubespbp.room.UserDB
-import com.example.tubespbp.room.UserDao
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -79,6 +78,12 @@ class LoginActivity : AppCompatActivity() {
                         if (userDB != null) {
                             Log.d("MainActivity", "dbResponse: $userDB")
                             withContext(Dispatchers.Main) {
+
+                                sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE)
+                                var editor = sharedPreferences?.edit()
+                                editor?.putString("id", userDB?.id.toString())
+                                editor?.commit()
+
                                 startActivity(moveHome)
                             }
                         } else {
@@ -89,12 +94,6 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                 }
-//                sharedPreferences = this.getSharedPreferences("userlog", Context.MODE_PRIVATE)
-//                var editor = sharedPreferences?.edit()
-//                editor?.putString("id", userDB?.id.toString())
-//                editor?.commit()
-
-
         })
 
         textDaftar.setOnClickListener(View.OnClickListener {
