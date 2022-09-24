@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -14,7 +15,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isEmpty
 import com.example.tubespbp.room.User
 import com.example.tubespbp.room.UserDB
+import com.example.tubespbp.room.UserDao
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class LoginActivity : AppCompatActivity() {
@@ -48,42 +54,46 @@ class LoginActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener(View.OnClickListener {
             var checkLogin = false
-
+            val moveHome = Intent(this@LoginActivity, HomeActivity::class.java)
             val username: String = inputUsername.getEditText()?.getText().toString()
             val password: String = inputPassword.getEditText()?.getText().toString()
-            val UserDB: User? = db.UserDao().getLogin(inputUsername.editText?.getText().toString(), inputPassword.editText?. getText(). toString())
 
-            if(!inputUsername.isEmpty() && !inputPassword.isEmpty()){
-
-                val username: String = inputUsername.getEditText()?.getText().toString()
-                val password: String = inputPassword.getEditText()?.getText().toString()
-
-                if (username.isEmpty() && password.isEmpty()) {
+                if (username.isEmpty()){
                     inputUsername.setError("Username must be filled with text")
+                    checkLogin = false
+                }
+                if(password.isEmpty()) {
                     inputPassword.setError("Password must be filled with text")
                     checkLogin = false
                 }
-                if(password.length < 8){
-                    inputPassword.setError("Password should more than contain 8 character")
+                if(!inputUsername.isEmpty() && !inputPassword.isEmpty()){
+                    checkLogin = true
                 }
-                if(mBundle != null){
-                    getBundle()
-                    if(username == regUser && password == regPass){
-                        checkLogin = true
+
+                if (!checkLogin) {
+                    return@OnClickListener
+                }else {
+                    val userDB: User? = db.UserDao().getLogin(username, password)
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        if (userDB != null) {
+                            Log.d("MainActivity", "dbResponse: $userDB")
+                            withContext(Dispatchers.Main) {
+                                startActivity(moveHome)
+                            }
+                        } else {
+                            Log.d("MainActivity", "Account doesn't exist")
+                            withContext(Dispatchers.Main){
+                                dialogBuilder()
+                            }
+                        }
                     }
                 }
-                if (!checkLogin) return@OnClickListener
-                sharedPreferences = this.getSharedPreferences("userlog", Context.MODE_PRIVATE)
-                var editor = sharedPreferences?.edit()
-                editor?.putString("id", UserDB?.id.toString())
-                editor?.commit()
+//                sharedPreferences = this.getSharedPreferences("userlog", Context.MODE_PRIVATE)
+//                var editor = sharedPreferences?.edit()
+//                editor?.putString("id", userDB?.id.toString())
+//                editor?.commit()
 
-            val moveHome = Intent(this@LoginActivity, HomeActivity::class.java)
-                finish()
-                startActivity(moveHome)
-            } else {
-                dialogBuilder()
-            }
 
         })
 
@@ -93,15 +103,17 @@ class LoginActivity : AppCompatActivity() {
         })
 
     }
-        fun dialogBuilder(){
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("ALERT")
-            builder.setMessage("Please register yourself!")
-            builder.setPositiveButton("OK", DialogInterface.OnClickListener{
-                    dialog, id -> loginActivity
-            })
-            builder.show()
-        }
+    fun dialogBuilder(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("ALERT")
+        builder.setMessage("This Account doesn't exist!")
+        builder.setPositiveButton("OK", DialogInterface.OnClickListener{
+                dialog, id -> loginActivity
+        })
+        builder.show()
+
+    }
+
         fun getBundle() {
         mBundle = intent.getBundleExtra("register")!!
         regUser = mBundle!!.getString("username")!!

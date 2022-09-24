@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FragmentNews">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/headlineCard"
         android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="10dp"
+        android:layout_height="150dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
         app:cardMaxElevation="12dp"
         app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true">
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--            android:src="@drawable/" />-->
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="509dp"
-            android:layout_height="213dp"
+            android:layout_width="430dp"
+            android:layout_height="153dp"
             android:layout_gravity="center"
-            android:radius="10dp"/>
-<!--            android:src="@drawable/" />-->
+            android:radius="10dp" />
 
         <TextView
             android:id="@+id/judulHeadline"
@@ -40,6 +44,7 @@
             android:textSize="20sp" />
 
         <Button
+            android:id="@+id/headlinebtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
@@ -50,25 +55,25 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/newsCard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/headlineCard"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="-20dp"
         android:layout_marginEnd="8dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
         app:cardMaxElevation="12dp"
         app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true">
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="20dp">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_news"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
@@ -77,4 +82,5 @@
         </androidx.recyclerview.widget.RecyclerView>
 
     </androidx.cardview.widget.CardView>
-</RelativeLayout>
+
+</LinearLayout>

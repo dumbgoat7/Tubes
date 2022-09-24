@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tubespbp.databinding.ActivityRegisterBinding
 import com.example.tubespbp.room.User
 import com.example.tubespbp.room.UserDB
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -37,8 +40,6 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.btnRegister.setOnClickListener(View.OnClickListener{
-            val intent = Intent(this, LoginActivity::class.java)
-            val mBundle = Bundle()
 
             val username: String = binding.layoutUsername.editText?.getText().toString()
             val email: String = binding.layoutEmail.editText?.getText().toString()
@@ -90,7 +91,10 @@ class RegisterActivity : AppCompatActivity() {
             if(checkRegister == true) {
 
                 val user = User(0, username, email, tanggalLahir, noHp, password)
-                db.UserDao().addUser(user)
+                CoroutineScope(Dispatchers.IO).launch{
+                    db.UserDao().addUser(user)
+                    finish()
+                }
 
                 val moveLogin = Intent(this, LoginActivity::class.java)
                 val bundle: Bundle = Bundle()
@@ -105,10 +109,6 @@ class RegisterActivity : AppCompatActivity() {
             } else {
                 return@OnClickListener
             }
-        })
-        binding.btnRegister.setOnClickListener(View.OnClickListener {
-            val moveLogin = Intent(this, LoginActivity::class.java)
-            startActivity(moveLogin)
         })
     }
 }
