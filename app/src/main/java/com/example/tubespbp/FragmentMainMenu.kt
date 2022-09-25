@@ -9,20 +9,27 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.example.tubespbp.databinding.FragmentMainmenuBinding
+import com.example.tubespbp.databinding.FragmentNewsBinding
+import com.example.tubespbp.room.UserDB
+import com.example.tubespbp.room.UserDao
 
-class FragmentMainMenu : Fragment() {
-    private lateinit var logOut : ImageView
+class FragmentMainMenu : Fragment(R.layout.fragment_mainmenu) {
+    private var _binding : FragmentMainmenuBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var dao : UserDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ):View? {
-        val view : View = inflater.inflate(R.layout.fragment_mainmenu, container, false)
 
-        logOut = view.findViewById(R.id.logout)
+        dao = UserDB.getDatabase(requireContext())!!.UserDao()
+        _binding = FragmentMainmenuBinding.inflate(inflater, container, false)
+        val rootView = binding.root
 
-        logOut.setOnClickListener{
-            val builder: AlertDialog.Builder = AlertDialog.Builder(view.context)
+        _binding!!.logout.setOnClickListener{
+            val builder: AlertDialog.Builder = AlertDialog.Builder(rootView.context)
             builder.setMessage("Do you want to exit?")
             builder.setPositiveButton("OK", object:DialogInterface.OnClickListener{
                 override fun onClick(dialogInterface: DialogInterface, i: Int) {
@@ -37,7 +44,13 @@ class FragmentMainMenu : Fragment() {
             builder.show()
 
         }
-        return view
+        _binding!!.cycle.setOnClickListener{
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction!!.replace(R.id.layout_fragment, FragmentNews())
+            transaction!!.addToBackStack(null)
+            transaction.commit()
+        }
+        return rootView
     }
 
 }

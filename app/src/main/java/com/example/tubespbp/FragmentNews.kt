@@ -54,7 +54,7 @@ class FragmentNews : Fragment(R.layout.fragment_rs) {
             }
         })
         list_news.apply {
-            val layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(context)
             adapter = newsAdapter
         }
 
