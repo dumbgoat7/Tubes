@@ -28,7 +28,7 @@ class FragmentMainMenu : Fragment(R.layout.fragment_mainmenu) {
         _binding = FragmentMainmenuBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
-        _binding!!.logout.setOnClickListener{
+        binding.logout.setOnClickListener{
             val builder: AlertDialog.Builder = AlertDialog.Builder(rootView.context)
             builder.setMessage("Do you want to exit?")
             builder.setPositiveButton("OK", object:DialogInterface.OnClickListener{
@@ -44,10 +44,10 @@ class FragmentMainMenu : Fragment(R.layout.fragment_mainmenu) {
             builder.show()
 
         }
-        _binding!!.cycle.setOnClickListener{
+        binding.cycle.setOnClickListener{
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction!!.replace(R.id.layout_fragment, FragmentNews())
-            transaction!!.addToBackStack(null)
+            transaction.addToBackStack(null)
             transaction.commit()
         }
         return rootView

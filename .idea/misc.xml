@@ -11,6 +11,7 @@
         <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.175" />
         <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/drawable/ic_edit.xml" value="0.279" />
         <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/drawable/ic_user_24.xml" value="0.175" />
+        <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/activity_edit_news.xml" value="0.2734375" />
         <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/activity_homescreen.xml" value="0.264" />
         <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/activity_login.xml" value="0.1" />
@@ -18,8 +19,9 @@
         <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/activity_startup.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/custom_action_bar.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/custuom_action_bar.xml" value="0.4" />
-        <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/fragment_mainmenu.xml" value="0.4" />
-        <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/fragment_news.xml" value="0.264" />
+        <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/fragment_mainmenu.xml" value="0.23615160349854228" />
+        <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/fragment_news.xml" value="0.536" />
+        <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/fragment_profile.xml" value="0.26403985507246375" />
         <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/fragment_rs.xml" value="0.22435897435897437" />
         <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/home_activity.xml" value="0.2734375" />
         <entry key="..\:/Users/RAKA/Desktop/Tubes_C_Kelompok-8/app/src/main/res/layout/rv_item_news.xml" value="0.27447916666666666" />

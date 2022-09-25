@@ -20,6 +20,7 @@ private val listener :OnAdapterListener) : RecyclerView.Adapter<NewsAdapter.News
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val news1 = news[position]
         holder.view.tv_judul_news.text = news1.judul
+        holder.view.tv_deskripsi.text = news1.deskripsi
         holder.view.tv_judul_news.setOnClickListener{
             listener.onClick(news1)
         }

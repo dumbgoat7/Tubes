@@ -54,8 +54,13 @@ class HomeActivity : AppCompatActivity() {
         if (fragment != null){
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.layout_fragment, fragment)
+            transaction.addToBackStack(null)
             transaction.commit()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
     fun setActivity(activity: AppCompatActivity){

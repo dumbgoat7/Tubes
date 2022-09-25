@@ -33,6 +33,9 @@
         <activity
             android:name=".EditProfileActivity"
             android:exported="false"/>
+        <activity
+            android:name=".EditNewsActivity"
+            android:exported="false"/>
 
     </application>
 
