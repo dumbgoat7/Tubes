@@ -36,7 +36,7 @@
         <activity
             android:name=".EditNewsActivity"
             android:exported="false"/>
-
+        <receiver android:name=".NotificationReceiver"/>
     </application>
 
 

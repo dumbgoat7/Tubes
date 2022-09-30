@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class FragmentNews : Fragment(R.layout.fragment_rs) {
+    val db by lazy{activity?.let { UserDB(it)}  }
     private lateinit var dao : NewsDao
     lateinit var newsAdapter: NewsAdapter
     var sharedPreferences: SharedPreferences? = null
@@ -46,15 +47,6 @@ class FragmentNews : Fragment(R.layout.fragment_rs) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        sharedPreferences = this.getActivity()?.getSharedPreferences("login", Context.MODE_PRIVATE)
-//        if( sharedPreferences!!.contains("idAdmin") ) {
-//
-//        } else {
-//            addbtn.visibility = GONE
-//            list_news.icon_edit.visibility = GONE
-//            list_news.icon_delete.visibility = GONE
-//        }
-        setupListener()
         newsAdapter = NewsAdapter(arrayListOf(), object : NewsAdapter.OnAdapterListener {
             override fun onClick(news: News) {
                 intentEdit(news.id,Constant.TYPE_READ)
@@ -71,6 +63,17 @@ class FragmentNews : Fragment(R.layout.fragment_rs) {
         list_news.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = newsAdapter
+        }
+        sharedPreferences = this.getActivity()?.getSharedPreferences("login", Context.MODE_PRIVATE)
+        val id = sharedPreferences?.getString("id", "-1")
+        val user = db?.UserDao()?.getUser(id!!.toInt())
+        if( user!!.username != "admin" ) {
+            addbtn.visibility = GONE
+//            list_news!!.icon_edit.visibility = GONE
+//            list_news!!.icon_delete.visibility = GONE
+
+        } else {
+            setupListener()
         }
 
     }
