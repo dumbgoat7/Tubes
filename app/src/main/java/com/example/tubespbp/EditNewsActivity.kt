@@ -64,7 +64,7 @@ class EditNewsActivity : AppCompatActivity() {
                     News(newsId,edit_title.text.toString(),
                         edit_note.text.toString())
                 )
-                sendNotificationSave()
+                sendNotificationUpdate()
                 finish()
             }
         }
@@ -85,6 +85,21 @@ class EditNewsActivity : AppCompatActivity() {
     }
 
     private fun sendNotificationSave(){
+        val bigtext = edit_note.getText().toString()
+        var builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.logo)
+            .setContentTitle("Hot News!!")
+            .setContentText(edit_title.getText().toString() + "\n" + edit_note.getText().toString())
+            .setColor(Color.GREEN)
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText(bigtext))
+        with(NotificationManagerCompat.from(this)){
+            notify(notificationId, builder.build())
+        }
+
+    }
+    private fun sendNotificationUpdate(){
         val bigtext = edit_note.getText().toString()
         var builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.logo)
