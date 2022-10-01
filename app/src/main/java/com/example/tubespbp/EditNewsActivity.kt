@@ -110,6 +110,7 @@ class EditNewsActivity : AppCompatActivity() {
             .setSmallIcon(R.drawable.logo)
             .setContentTitle("Breaking News!")
             .setColor(Color.GREEN)
+//            .setGroup()
             .setStyle(
                 NotificationCompat.BigTextStyle()
                     .bigText(bigtext)
@@ -128,9 +129,10 @@ class EditNewsActivity : AppCompatActivity() {
             .setColor(Color.GREEN)
             .setStyle(
                 NotificationCompat.InboxStyle()
-                    .setBigContentTitle(title)
-                    .setSummaryText("News Update!")
-                    .addLine(title))
+                    .setBigContentTitle("Latest Update!")
+                    .setSummaryText("Update News!")
+                    .addLine(title)
+                    .addLine("This is the latest update"))
         with(NotificationManagerCompat.from(this)){
             notify(notificationId, builder.build())
         }
