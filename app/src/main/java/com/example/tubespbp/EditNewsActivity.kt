@@ -1,6 +1,10 @@
 package com.example.tubespbp
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +27,7 @@ class EditNewsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_news)
+        createNotificationChannel()
         setupView()
         setupListener()
     }
@@ -37,7 +42,6 @@ class EditNewsActivity : AppCompatActivity() {
             Constant.TYPE_READ -> {
                 button_save.visibility = View.GONE
                 button_update.visibility = View.GONE
-                getNews()
             }
             Constant.TYPE_UPDATE -> {
                 button_save.visibility = View.GONE
@@ -84,31 +88,49 @@ class EditNewsActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
+    private fun createNotificationChannel() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Notification Title"
+            val descriptionText = "Notification Description"
+
+            val channel = NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                description = descriptionText
+            }
+
+            val notificationManager : NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
     private fun sendNotificationSave(){
         val bigtext = edit_note.getText().toString()
+        val title = edit_title.getText().toString()
         var builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.logo)
-            .setContentTitle("Hot News!!")
-            .setContentText(edit_title.getText().toString() + "\n" + edit_note.getText().toString())
+            .setContentTitle("Breaking News!")
             .setColor(Color.GREEN)
             .setStyle(
                 NotificationCompat.BigTextStyle()
-                    .bigText(bigtext))
+                    .bigText(bigtext)
+                    .setBigContentTitle(title)
+                    .setSummaryText("Hot News!"))
         with(NotificationManagerCompat.from(this)){
             notify(notificationId, builder.build())
         }
 
     }
     private fun sendNotificationUpdate(){
-        val bigtext = edit_note.getText().toString()
+        val title = edit_title.getText().toString()
         var builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.logo)
-            .setContentTitle("Hot News!!")
-            .setContentText(edit_title.getText().toString() + "\n" + edit_note.getText().toString())
+            .setContentTitle("Latest Update!")
             .setColor(Color.GREEN)
             .setStyle(
-                NotificationCompat.BigTextStyle()
-                    .bigText(bigtext))
+                NotificationCompat.InboxStyle()
+                    .setBigContentTitle(title)
+                    .setSummaryText("News Update!")
+                    .addLine(title))
         with(NotificationManagerCompat.from(this)){
             notify(notificationId, builder.build())
         }
