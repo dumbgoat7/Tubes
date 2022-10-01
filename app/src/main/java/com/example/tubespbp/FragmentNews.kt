@@ -9,13 +9,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
-import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tubespbp.databinding.FragmentNewsBinding
-import com.example.tubespbp.room.*
+import com.example.tubespbp.room.Constant
+import com.example.tubespbp.room.News
+import com.example.tubespbp.room.NewsDao
+import com.example.tubespbp.room.UserDB
 import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.rv_item_news.view.*
 import kotlinx.coroutines.CoroutineScope
@@ -69,8 +71,8 @@ class FragmentNews : Fragment(R.layout.fragment_rs) {
         val user = db?.UserDao()?.getUser(id!!.toInt())
         if( user!!.username != "admin" ) {
             addbtn.visibility = GONE
-//            list_news!!.icon_edit.visibility = GONE
-//            list_news!!.icon_delete.visibility = GONE
+            list_news!!.icon_edit.visibility = GONE
+            list_news!!.icon_delete.visibility = GONE
 
         } else {
             setupListener()
