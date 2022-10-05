@@ -19,7 +19,6 @@ import com.example.tubespbp.room.News
 import com.example.tubespbp.room.NewsDao
 import com.example.tubespbp.room.UserDB
 import kotlinx.android.synthetic.main.fragment_news.*
-import kotlinx.android.synthetic.main.rv_item_news.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -71,8 +70,8 @@ class FragmentNews : Fragment(R.layout.fragment_rs) {
         val user = db?.UserDao()?.getUser(id!!.toInt())
         if( user!!.username != "admin" ) {
             addbtn.visibility = GONE
-            list_news!!.icon_edit.visibility = GONE
-            list_news!!.icon_delete.visibility = GONE
+            //list_news!!.icon_edit.visibility = GONE
+            //list_news!!.icon_delete.visibility = GONE
 
         } else {
             setupListener()
