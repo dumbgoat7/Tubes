@@ -36,6 +36,9 @@
         <activity
             android:name=".EditNewsActivity"
             android:exported="false"/>
+        <activity
+            android:name=".IntroPageActivity"
+            android:exported="false"/>
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">

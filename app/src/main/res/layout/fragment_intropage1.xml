@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/hiasan1"
+        android:layout_width="508dp"
+        android:layout_height="285dp"
+        android:layout_marginEnd="-100dp"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@drawable/hiasan1" />
+
+    <ImageView
+        android:id="@+id/hiasan2"
+        android:layout_width="wrap_content"
+        android:layout_height="456dp"
+        android:layout_below="@id/hiasan1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-13dp"
+        app:srcCompat="@drawable/hiasan2" />
+
+    <ImageView
+        android:id="@+id/hiasan3"
+        android:layout_width="417dp"
+        android:layout_height="252dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="88dp"
+        android:layout_marginBottom="-40dp"
+        app:srcCompat="@drawable/hiasan3" />
+
+    <TextView
+        android:id="@+id/welcomeText"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="27dp"
+        android:layout_below="@id/hiasan1"
+        android:textAlignment="center"
+        android:text="Selamat Datang \n di xxxx"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/desc1"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcomeText"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="27dp"
+        android:alpha="0.5"
+        android:text="Kami bertekad untuk membantu Anda dalam meningkatkan kualitas kesehatan Anda"
+        android:textAlignment="center"
+        android:textColor="@color/black" />
+
+    <ImageButton
+        android:id="@+id/btn1"
+        android:layout_width="166dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/desc1"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/white"
+        android:elevation="10dp"
+        android:background="@drawable/shapebutton"
+        android:src="@drawable/hiasan5"/>
+
+    <ImageView
+        android:id="@+id/hiasan4"
+        android:layout_width="89dp"
+        android:layout_height="4dp"
+        android:layout_below="@id/btn1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/hiasan4" />
+
+
+
+
+</RelativeLayout>

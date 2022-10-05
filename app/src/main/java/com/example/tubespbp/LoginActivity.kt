@@ -114,9 +114,12 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-        fun getBundle() {
+    fun getBundle() {
         mBundle = intent.getBundleExtra("register")!!
         regUser = mBundle!!.getString("username")!!
         regPass = mBundle!!.getString("password")!!
+    }
+    override fun onBackPressed() {
+        return
     }
 }

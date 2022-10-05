@@ -42,6 +42,9 @@ class EditNewsActivity : AppCompatActivity() {
             Constant.TYPE_READ -> {
                 button_save.visibility = View.GONE
                 button_update.visibility = View.GONE
+                edit_title.keyListener = null
+                edit_note.keyListener = null
+                getNews()
             }
             Constant.TYPE_UPDATE -> {
                 button_save.visibility = View.GONE

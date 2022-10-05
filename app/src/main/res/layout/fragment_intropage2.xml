@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/hiasan5"
+        android:layout_width="446dp"
+        android:layout_height="288dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="-50dp"
+        android:layout_marginEnd="16dp"
+        app:srcCompat="@drawable/hiasan7" />
+
+    <ImageView
+        android:id="@+id/hiasan6"
+        android:layout_width="76dp"
+        android:layout_height="11dp"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@drawable/hiasan8" />
+
+    <ImageView
+        android:id="@+id/hiasan7"
+        android:layout_width="237dp"
+        android:layout_height="197dp"
+        android:layout_below="@id/hiasan5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-50dp"
+        android:layout_marginTop="-62dp"
+        android:layout_marginEnd="16dp"
+        app:srcCompat="@drawable/hiasan6" />
+
+    <TextView
+        android:id="@+id/desc2"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="237dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hiasan7"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:alpha="0.5"
+        android:text="Selalu terupdate terhadap status \n kondisi kesehatan Anda selama \n berkegiatan di era Covid-19 ini"
+        android:textAlignment="center"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/startText"
+        android:layout_width="237dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/desc2"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#00B4D8"
+        android:text="Mulai"
+        android:textAlignment="center" />
+
+    <ImageView
+        android:id="@+id/hiasan8"
+        android:layout_width="89dp"
+        android:layout_height="4dp"
+        android:layout_below="@id/startText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/hiasan10" />
+
+    <ImageView
+        android:id="@+id/hiasan9"
+        android:layout_width="417dp"
+        android:layout_height="252dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="88dp"
+        android:layout_marginBottom="-40dp"
+        app:srcCompat="@drawable/hiasan9" />
+
+</RelativeLayout>
