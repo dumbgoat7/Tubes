@@ -37,13 +37,12 @@
         style="@style/TextAppearance.MaterialComponents.Headline4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/hiasan1"
         android:layout_marginStart="27dp"
         android:layout_marginEnd="27dp"
-        android:layout_below="@id/hiasan1"
+        android:text="Selamat Datang \n di Healthy-U"
         android:textAlignment="center"
-        android:text="Selamat Datang \n di xxxx"
-        android:textColor="@color/black"
-        />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/desc1"

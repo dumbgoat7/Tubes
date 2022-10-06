@@ -24,7 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class FragmentNews : Fragment(R.layout.fragment_rs) {
+class FragmentNews : Fragment() {
     val db by lazy{activity?.let { UserDB(it)}  }
     private lateinit var dao : NewsDao
     lateinit var newsAdapter: NewsAdapter
