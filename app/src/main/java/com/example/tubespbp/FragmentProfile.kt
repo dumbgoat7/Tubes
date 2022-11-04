@@ -1,12 +1,14 @@
 package com.example.tubespbp
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.tubespbp.room.UserDB
@@ -31,6 +33,7 @@ class FragmentProfile : Fragment() {
         val tanggalLahirTxt :TextView =  view.findViewById(R.id.etTglLahir)
         val noHpTxt :TextView =  view.findViewById(R.id.etNoHp)
         val btnEdit : Button = view.findViewById(R.id.btnEdit)
+        val imageButton : ImageView = view.findViewById(R.id.user)
         val id = sharedPreferences?.getString("id", "-1")
 
         val user = db?.UserDao()?.getUser(id!!.toInt())
@@ -41,6 +44,13 @@ class FragmentProfile : Fragment() {
 
         btnEdit.setOnClickListener(){
             (activity as HomeActivity).setActivity(EditProfileActivity())
+        }
+
+        imageButton.setOnClickListener(){
+            println("hello")
+            val intent = Intent(requireActivity(), CameraActivity::class.java)
+
+            startActivity(intent)
         }
 
     }

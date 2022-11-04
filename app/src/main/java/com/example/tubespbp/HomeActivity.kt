@@ -18,6 +18,7 @@ class HomeActivity : AppCompatActivity() {
         val fragmentProfile = FragmentProfile()
         val fragmentRs = FragmentRS()
         val fragmentMainMenu = FragmentMainMenu()
+        val cameraActivity = CameraActivity()
 
         setCurrentFragment(fragmentMainMenu)
 
@@ -31,6 +32,11 @@ class HomeActivity : AppCompatActivity() {
                 }
                 R.id.ic_hospital-> {
                     setCurrentFragment(fragmentRs)
+                    true
+                }
+                R.id.ic_scan-> {
+                    val intent = Intent(this, CameraActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.ic_profile->{
