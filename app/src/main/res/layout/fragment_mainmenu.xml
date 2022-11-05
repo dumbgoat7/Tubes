@@ -1,243 +1,401 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#00008577"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_logout_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/toolbar"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/Welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appBarLayout"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Welcome, "
+        android:textColor="#005B9A"
+        android:textSize="20sp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-10dp"
+        android:orientation="vertical"
+        app:cardBackgroundColor="#00FFFFFF"
+        app:cardElevation="20dp"
+        app:cardUseCompatPadding="true">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="90dp"
+                android:background="@drawable/bg_rounded_rect"
+                android:backgroundTint="@android:color/holo_blue_light"
+                android:padding="10dp">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="#00008577"
-                    android:minHeight="?attr/actionBarSize"
-                    android:theme="?attr/actionBarTheme"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tvDesc"
+                    android:layout_width="214dp"
+                    android:layout_height="69dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:ellipsize="end"
+                    android:lines="3"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="2"
+                    android:shadowDy="4"
+                    android:shadowRadius="5"
+                    android:text="Ingin berpergian?\nBerhati-hatilah dengan lingkungan luar !"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
                 <ImageView
-                    android:id="@+id/logout"
+                    android:id="@+id/iv_scanning"
+                    android:layout_width="94dp"
+                    android:layout_height="110dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-7dp"
+                    android:layout_marginEnd="-10dp"
+                    android:layout_marginBottom="0dp"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/scanning" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <Button
+                    android:id="@+id/scanbtn"
+                    android:layout_width="153dp"
+                    android:layout_height="51dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded"
+                    android:drawableLeft="@drawable/scanblue"
+                    android:text="Scan Here"
+                    android:textSize="12sp"
+                    android:textStyle="bold"></Button>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvContent2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cvContent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-20dp"
+        android:orientation="vertical"
+        app:cardBackgroundColor="#00FFFFFF"
+        app:cardElevation="20dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="370dp"
+                android:background="@drawable/reverse_rounded_rect"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageButton
+                    android:id="@+id/vaccinebtn"
+                    android:layout_width="80dp"
+                    android:layout_height="65dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/semirounded"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="2"
+                    android:shadowDy="4"
+                    android:shadowRadius="5"
+                    android:src="@drawable/vaccination"
+                    android:text="Scan Here"
+                    android:textSize="12sp"></ImageButton>
+
+                <ImageButton
+                    android:id="@+id/covidbtn"
+                    android:layout_width="80dp"
+                    android:layout_height="65dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/semirounded"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="2"
+                    android:shadowDy="4"
+                    android:shadowRadius="5"
+                    android:src="@drawable/covid19"
+                    android:text="Scan Here"
+                    android:textSize="12sp"></ImageButton>
+
+                <ImageButton
+                    android:id="@+id/rsbtn"
+                    android:layout_width="80dp"
+                    android:layout_height="65dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="@drawable/semirounded"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="2"
+                    android:shadowDy="4"
+                    android:shadowRadius="5"
+                    android:src="@drawable/rsicon"
+                    android:text="Scan Here"
+                    android:textSize="12sp"></ImageButton>
+
+                <TextView
+                    android:id="@+id/tvVaccination"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_below="@id/vaccinebtn"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Vaccination"
+                    android:textColor="#006383"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCovid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_below="@id/covidbtn"
+                    android:layout_centerInParent="true"
+                    android:text="Covid-19 Test"
+                    android:textColor="#006383"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvRS"
+                    android:layout_width="88dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/rsbtn"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_toRightOf="@id/tvCovid"
+                    android:lines="2"
+                    android:text="Healthcare \n Facility"
+                    android:textAlignment="center"
+                    android:textColor="#006383"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardChart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_logout_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/toolbar"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.appbar.AppBarLayout>
+                    android:layout_below="@id/tvVaccination"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
+                    app:cardBackgroundColor="#00FFFFFF"
+                    app:cardElevation="20dp">
 
-        <TextView
-            android:id="@+id/Welcome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Welcome"
-            android:textColor="#005B9A"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-            app:layout_constraintVertical_bias="0.064" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="102dp"
+                        android:background="@drawable/bg_rounded_rect"
+                        android:backgroundTint="#D8F8FF"
+                        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/Welcome2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="4dp"
-            android:text="Awas Covid 19"
-            android:textColor="#005B9A"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Welcome" />
+                        <TextView
+                            android:id="@+id/tvStats"
+                            android:layout_width="214dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:text="Covid-19 Statistik"
+                            android:textColor="#006383"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Welcome2"
-            tools:layout_editor_absoluteY="135dp">
+                        <TextView
+                            android:id="@+id/tvStatsdesc"
+                            android:layout_width="214dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvStats"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text="Pergerakan terbaru dari covid-19"
+                            android:textColor="#006383"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="#74C2E1">
+                        <Button
+                            android:id="@+id/cekbtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvStatsdesc"
+                            android:layout_marginStart="20dp"
+                            android:text="cek Sekarang"
+                            android:textSize="10dp"
+                            android:textStyle="bold"/>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/iv_chart"
+                            android:layout_width="94dp"
+                            android:layout_height="110dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="-1dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/chart" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/bus"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:text="Health Care"
-                        android:textColor="#005B9A"
-                        android:textSize="24sp" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cardChart"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
+                    app:cardBackgroundColor="#00FFFFFF"
+                    app:cardElevation="20dp">
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="102dp"
+                        android:background="@drawable/bg_rounded_rect"
+                        android:backgroundTint="#D8F8FF"
+                        android:padding="10dp">
 
-                    <ImageView
-                        android:id="@+id/bus"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/healthcare" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/tvNews"
+                            android:layout_width="214dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:text="Cek Berita Kesehatan"
+                            android:textColor="#006383"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="#74C2E1">
+                        <TextView
+                            android:id="@+id/tvNewsdesc"
+                            android:layout_width="214dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvNews"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text="Berita-berita terbaru dari dunia kesehatan"
+                            android:textColor="#006383"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                        <Button
+                            android:id="@+id/readbtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvNewsdesc"
+                            android:layout_marginStart="20dp"
+                            android:text="Baca Sekarang"
+                            android:textStyle="bold"
+                            android:textSize="10dp" />
 
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/imageView3"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:text="Vaccination"
-                        android:textColor="#005B9A"
-                        android:textSize="24sp" />
+                        <ImageView
+                            android:id="@+id/iv_news"
+                            android:layout_width="94dp"
+                            android:layout_height="110dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="-1dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="0dp"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/cekberita" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/vacine" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="#CCFFFF">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/bus1"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:text="Statistik Covid"
-                        android:textColor="#005B9A"
-                        android:textSize="24sp" />
-
-
-                    <ImageView
-                        android:id="@+id/bus1"
-                        android:layout_width="118dp"
-                        android:layout_height="75dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/covid" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+            </RelativeLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+    </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="#CCFFFF">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/cycle"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:text="Cek Berita Kesehatan"
-                        android:textColor="#005B9A"
-                        android:textSize="24sp" />
-
-                    <ImageView
-                        android:id="@+id/cycle"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/berita" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>
+</ScrollView>

@@ -44,11 +44,16 @@ class FragmentMainMenu : Fragment(R.layout.fragment_mainmenu) {
             builder.show()
 
         }
-        binding.cycle.setOnClickListener{
+        binding.readbtn.setOnClickListener{
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction!!.replace(R.id.layout_fragment, FragmentNews())
             transaction.addToBackStack(null)
             transaction.commit()
+        }
+        binding.scanbtn.setOnClickListener{
+            val intent = Intent ( getActivity(), CameraActivity::class.java)
+            getActivity()?.onBackPressed()
+            startActivity(intent)
         }
         return rootView
     }
