@@ -1,0 +1,105 @@
+{
+  "results": [
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.7770724,
+          "lng": 110.3747976
+        }
+      },
+      "name": "Rumah Sakit Panti Rapih",
+      "vicinity": "Jl. Cik Di Tiro No.30, Samirono, Terban, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55223"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.7721548,
+          "lng": 110.46457
+        }
+      },
+      "name": "Rumah Sakit Panti Rini",
+      "vicinity": "Jl. Raya Solo - Yogyakarta KM.13,2, Kringinan, Tirtomartani, Kec. Kalasan, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55571"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.797648,
+          "lng": 110.4081395
+        }
+      },
+      "name": "RSPAU Dr. S. Hardjolukito",
+      "vicinity": "JL. Janti Yogyakarta, Lanud Adisutjipto, Jl. Ringroad Timur, Karang Janbe, Banguntapan, Kec. Banguntapan, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55198"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.7834211,
+          "lng": 110.3886895
+        }
+      },
+      "name": "Siloam Hospitals Yogyakarta",
+      "vicinity": "Jl. Laksda Adisucipto No.32-34, Demangan, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55221"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.7839847,
+          "lng": 110.375502
+        }
+      },
+      "name": "Rumah Sakit Bethesda",
+      "vicinity": "Jl. Jend. Sudirman No.70, Kotabaru, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55224"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.7662066,
+          "lng": 110.469635
+        }
+      },
+      "name": "RS Bhayangkara Jogja",
+      "vicinity": "Jl. Raya Solo - Yogyakarta KM.14, Glondong, Tirtomartani, Kec. Kalasan, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55571"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.768611,
+          "lng": 110.3712855
+        }
+      },
+      "name": "Dr.Sardjito General Hospital",
+      "vicinity": "Jl. Kesehatan Jl. Kesehatan Sendowo No.1, Sendowo, Sinduadi, Kec. Mlati, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.7625786,
+          "lng": 110.3345716
+        }
+      },
+      "name": "Rumah Sakit Umum Queen Latifa",
+      "vicinity": "Jl. Ringroad Barat No.118, Mlangi, Nogotirto, Kec. Gamping, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55294"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.7702489,
+          "lng": 110.4305839
+        }
+      },
+      "name": "Hermina Hospital Yogya",
+      "vicinity": "Jl. Selokan Mataram, RT.06/RW.50, Meguwo, Maguwoharjo, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55282"
+    },
+    {
+      "geometry": {
+        "location": {
+          "lat": -7.7578686,
+          "lng": 110.4013115
+        }
+      },
+      "name": "JIH Hospital",
+      "vicinity": "Jl. Ring Road Utara No.160, Perumnas Condong Catur, Condongcatur, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55283"
+    }
+  ],
+  "status": "OK"
+}
