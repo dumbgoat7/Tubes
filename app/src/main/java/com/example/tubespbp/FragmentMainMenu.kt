@@ -51,9 +51,14 @@ class FragmentMainMenu : Fragment(R.layout.fragment_mainmenu) {
             transaction.commit()
         }
         binding.scanbtn.setOnClickListener{
-            val intent = Intent ( getActivity(), CameraActivity::class.java)
-            getActivity()?.onBackPressed()
+            val intent = Intent(getActivity(), CameraActivity::class.java)
             startActivity(intent)
+        }
+        binding.rsbtn.setOnClickListener{
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction!!.replace(R.id.layout_fragment, FragmentRS())
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
         return rootView
     }

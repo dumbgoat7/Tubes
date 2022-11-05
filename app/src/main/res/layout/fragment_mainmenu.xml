@@ -128,7 +128,7 @@
                     android:drawableLeft="@drawable/scanblue"
                     android:text="Scan Here"
                     android:textSize="12sp"
-                    android:textStyle="bold"></Button>
+                    android:textStyle="bold"/>
 
             </RelativeLayout>
 
