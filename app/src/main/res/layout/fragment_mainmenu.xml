@@ -147,10 +147,6 @@
         app:cardElevation="20dp"
         app:cardUseCompatPadding="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -161,13 +157,13 @@
 
                 <ImageButton
                     android:id="@+id/vaccinebtn"
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="65dp"
-                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginStart="40dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toLeftOf="@id/covidbtn"
                     android:background="@drawable/bg_semirounded"
                     android:shadowColor="@color/black"
                     android:shadowDx="2"
@@ -175,7 +171,7 @@
                     android:shadowRadius="5"
                     android:src="@drawable/vaccination"
                     android:text="Scan Here"
-                    android:textSize="12sp"></ImageButton>
+                    android:textSize="12sp" />
 
                 <ImageButton
                     android:id="@+id/covidbtn"
@@ -195,13 +191,13 @@
 
                 <ImageButton
                     android:id="@+id/rsbtn"
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="65dp"
                     android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="40dp"
+                    android:layout_toRightOf="@id/covidbtn"
                     android:background="@drawable/bg_semirounded"
                     android:shadowColor="@color/black"
                     android:shadowDx="2"
@@ -216,8 +212,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="26dp"
                     android:layout_below="@id/vaccinebtn"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="40dp"
+                    android:layout_toLeftOf="@id/tvCovid"
                     android:layout_marginEnd="10dp"
                     android:text="Vaccination"
                     android:textColor="#006383"
@@ -240,7 +235,6 @@
                     android:layout_width="88dp"
                     android:layout_height="50dp"
                     android:layout_below="@id/rsbtn"
-                    android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="30dp"
@@ -391,8 +385,6 @@
                 </androidx.cardview.widget.CardView>
 
             </RelativeLayout>
-
-        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
