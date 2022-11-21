@@ -11,16 +11,29 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.android.volley.AuthFailureError
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.example.tubespbp.api.UserAPI
 import com.example.tubespbp.databinding.ActivityRegisterBinding
 import com.example.tubespbp.room.User
 import com.example.tubespbp.room.UserDB
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
+import java.nio.charset.StandardCharsets
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -28,6 +41,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var binding:ActivityRegisterBinding
     private val CHANNEL_ID_1 = "channel_notification_01"
     private val notificationId1 = 101
+    private var queue: RequestQueue? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +50,7 @@ class RegisterActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         createNotificationChannel()
+        queue = Volley.newRequestQueue(this)
         setTitle("Daftar")
 
         binding.etTglLahir.setOnClickListener{
@@ -102,6 +117,8 @@ class RegisterActivity : AppCompatActivity() {
 
             if(checkRegister == true) {
 
+                userCheck()
+
                 val user = User(0, username, email, tanggalLahir, noHp, password)
                 CoroutineScope(Dispatchers.IO).launch{
                     db.UserDao().addUser(user)
@@ -163,5 +180,78 @@ class RegisterActivity : AppCompatActivity() {
         with(NotificationManagerCompat.from(this)) {
             notify(notificationId1, builder.build())
         }
+    }
+
+    private fun userCheck(){
+        val formatter = DateTimeFormatter.ofPattern("d/MM/yyyy", Locale.ENGLISH)
+        val date = LocalDate.parse(binding?.layoutTanggalLahir?.editText?.getText().toString(), formatter)
+
+        val user = com.example.tubespbp.Models.User(
+            binding?.layoutUsername?.editText?.getText().toString(),
+            binding?.layoutEmail?.editText?.getText().toString(),
+            date.toString(),
+            binding?.layoutNoHp?.editText?.getText().toString(),
+            binding?.layoutPassword?.editText?.getText().toString(),
+        )
+
+        val stringRequest: StringRequest =
+            object: StringRequest(Method.POST, UserAPI.ADD_URL, Response.Listener { response ->
+                val gson = Gson()
+                var profile = gson.fromJson(response,com.example.tubespbp.Models.User::class.java)
+                println(gson)
+                if(profile != null)
+                    Toast.makeText(this@RegisterActivity, "Register Successfully", Toast.LENGTH_SHORT).show()
+
+                val returnIntent = Intent()
+                setResult(RESULT_OK, returnIntent)
+                finish()
+
+            }, Response.ErrorListener { error ->
+                AlertDialog.Builder(this@RegisterActivity)
+                    .setTitle("Error")
+                    .setMessage(error.message)
+                    .setPositiveButton("OK", null)
+                    .show()
+                try{
+                    val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                    val errors = JSONObject(responseBody)
+                    Toast.makeText(
+                        this,
+                        errors.getString("message"),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }catch (e: Exception){
+                    Toast.makeText(this@RegisterActivity, e.message, Toast.LENGTH_SHORT).show()
+                }
+            }){
+                @Throws(AuthFailureError::class)
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Accept"] = "application/json"
+                    println(headers)
+                    return headers
+                }
+
+                @Throws(AuthFailureError::class)
+                override fun getBody(): ByteArray {
+                    val gson = Gson()
+                    val requestBody = gson.toJson(user)
+                    return requestBody.toByteArray(StandardCharsets.UTF_8)
+                }
+//                override fun getParams(): Map<String, String> {
+//                    val params = HashMap<String, String>()
+//                    params["name"] = itemBinding?.ilName?.editText?.getText().toString()
+//                    params["notelp"] = itemBinding?.ilNoTelp?.editText?.getText().toString()
+//                    params["email"] = itemBinding?.ilEmail?.editText?.getText().toString()
+//                    params["birthdate"] = date.toString()
+//                    params["password"] = itemBinding?.ilPassword?.editText?.getText().toString()
+//                    return params
+//                }
+
+                override fun getBodyContentType(): String {
+                    return "application/json"
+                }
+            }
+        queue!!.add(stringRequest)
     }
 }
