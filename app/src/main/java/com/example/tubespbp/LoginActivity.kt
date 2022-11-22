@@ -57,7 +57,6 @@ class LoginActivity : AppCompatActivity() {
         sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE)
         val token = sharedPreferences?.getString("token", "")
         println(token!!)
-        authCheck(token!!)
         queue = Volley.newRequestQueue(this)
 
         inputUsername = findViewById(R.id.inputLayoutUsername)
@@ -207,44 +206,6 @@ class LoginActivity : AppCompatActivity() {
 //                    return "application/json"
 //                }
             }
-        queue!!.add(stringRequest)
-    }
-
-    private fun authCheck(token: String){
-        val stringRequest : StringRequest = object:
-            StringRequest(Method.POST, UserAPI.GET_ALL_URL, Response.Listener { response ->
-                val gson = Gson()
-                val jsonObject = JSONObject(response)
-                val auth : String = jsonObject.getString("message").toString()
-                println(token)
-                if(auth == "Authenticated") {
-                    sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE)
-                    val moveMenu = Intent(this, HomeActivity::class.java)
-                    startActivity(moveMenu)
-                }
-            }, Response.ErrorListener { error ->
-//                AlertDialog.Builder(this@ActivityLogin)
-//                    .setTitle("Error")
-//                    .setMessage(error.message)
-//                    .setPositiveButton("OK", null)
-//                    .show()
-//                try {
-//                    val responseBody =
-//                        String(error.networkResponse.data, StandardCharsets.UTF_8)
-//                    val errors = JSONObject(responseBody)
-//                    Toast.makeText(this@ActivityLogin, errors.getString("message"), Toast.LENGTH_SHORT).show()
-//                } catch (e: Exception){
-//                    Toast.makeText(this@ActivityLogin, e.message, Toast.LENGTH_SHORT).show()
-//                }
-            }){
-            @Throws(AuthFailureError::class)
-            override fun getHeaders(): Map<String, String> {
-                val headers = HashMap<String, String>()
-                headers["Accept"] = "application/json";
-                headers["Authorization"] = "Bearer $token"
-                return headers
-            }
-        }
         queue!!.add(stringRequest)
     }
 }

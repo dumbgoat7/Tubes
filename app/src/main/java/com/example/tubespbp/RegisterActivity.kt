@@ -117,11 +117,9 @@ class RegisterActivity : AppCompatActivity() {
 
             if(checkRegister == true) {
 
-                userCheck()
-
                 val user = User(0, username, email, tanggalLahir, noHp, password)
                 CoroutineScope(Dispatchers.IO).launch{
-                    db.UserDao().addUser(user)
+                    userCheck()
                     finish()
                 }
                 sendNotification()
@@ -232,25 +230,25 @@ class RegisterActivity : AppCompatActivity() {
                     return headers
                 }
 
-                @Throws(AuthFailureError::class)
-                override fun getBody(): ByteArray {
-                    val gson = Gson()
-                    val requestBody = gson.toJson(user)
-                    return requestBody.toByteArray(StandardCharsets.UTF_8)
-                }
-//                override fun getParams(): Map<String, String> {
-//                    val params = HashMap<String, String>()
-//                    params["name"] = itemBinding?.ilName?.editText?.getText().toString()
-//                    params["notelp"] = itemBinding?.ilNoTelp?.editText?.getText().toString()
-//                    params["email"] = itemBinding?.ilEmail?.editText?.getText().toString()
-//                    params["birthdate"] = date.toString()
-//                    params["password"] = itemBinding?.ilPassword?.editText?.getText().toString()
-//                    return params
+//                @Throws(AuthFailureError::class)
+//                override fun getBody(): ByteArray {
+//                    val gson = Gson()
+//                    val requestBody = gson.toJson(user)
+//                    return requestBody.toByteArray(StandardCharsets.UTF_8)
 //                }
-
-                override fun getBodyContentType(): String {
-                    return "application/json"
+                override fun getParams(): Map<String, String> {
+                    val params = HashMap<String, String>()
+                    params["username"] = binding?.layoutUsername?.editText?.getText().toString()
+                    params["email"] = binding?.layoutEmail?.editText?.getText().toString()
+                    params["birthdate"] = date.toString()
+                    params["noHp"] = binding?.layoutNoHp?.editText?.getText().toString()
+                    params["password"] = binding?.layoutPassword?.editText?.getText().toString()
+                    return params
                 }
+
+//                override fun getBodyContentType(): String {
+//                    return "application/json"
+//                }
             }
         queue!!.add(stringRequest)
     }
