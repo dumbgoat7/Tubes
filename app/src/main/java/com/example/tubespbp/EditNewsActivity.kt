@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -35,12 +36,17 @@ class EditNewsActivity : AppCompatActivity() {
     private val CHANNEL_ID = "channel_notification"
     private val notificationId = 100
     private var queue: RequestQueue? = null
+    var sharedPreferences: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_news)
+        sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE)
+        val id = sharedPreferences?.getString("id", "-1")
         queue = Volley.newRequestQueue(this)
         createNotificationChannel()
+
+        getNewsByID(id!!.toInt())
         setupView()
         setupListener()
     }
@@ -57,11 +63,9 @@ class EditNewsActivity : AppCompatActivity() {
                 button_update.visibility = View.GONE
                 edit_title.keyListener = null
                 edit_note.keyListener = null
-                getNewsByID()
             }
             Constant.TYPE_UPDATE -> {
                 button_save.visibility = View.GONE
-                getNewsByID()
             }
         }
     }
@@ -92,14 +96,15 @@ class EditNewsActivity : AppCompatActivity() {
         }
     }
 
-    fun getNewsByID() {
-        newsId = intent.getIntExtra("intent_id",0)
+    fun getNewsByID(id: Int) {
 
         val stringRequest: StringRequest = object :
             StringRequest(
-                Method.GET, NewsAPI.GET_BY_ID_URL + newsId,
+                Method.GET, NewsAPI.GET_BY_ID_URL + id,
                 { response ->
-                    val news = Gson().fromJson(response, News::class.java)
+                    val gson = Gson()
+                    val jsonObject = JSONObject(response)
+                    val news = gson.fromJson(jsonObject.getJSONObject("data").toString(),  News::class.java)
                     edit_title!!.setText(news.judul)
                     edit_note!!.setText(news.deskripsi)
                     Toast.makeText(
@@ -146,11 +151,12 @@ class EditNewsActivity : AppCompatActivity() {
             object :
                 StringRequest(Method.POST, NewsAPI.ADD_URL, Response.Listener { response ->
                     val gson = Gson()
-                    var mahasiswa = gson.fromJson(response, News::class.java)
+                    var news = gson.fromJson(response, News::class.java)
 
-                    if (mahasiswa != null)
+                    if (news != null) {
                         sendNotificationSave()
                         finish()
+                    }
 
                     val returnIntent = Intent()
                     setResult(RESULT_OK, returnIntent)
@@ -201,9 +207,9 @@ class EditNewsActivity : AppCompatActivity() {
             object :
                 StringRequest(Method.PUT, NewsAPI.UPDATE_URL + newsId, Response.Listener { response ->
                     val gson = Gson()
-                    var mahasiswa = gson.fromJson(response, News::class.java)
+                    var news = gson.fromJson(response, News::class.java)
 
-                    if (mahasiswa != null)
+                    if (news != null)
                         sendNotificationUpdate()
                         finish()
 
