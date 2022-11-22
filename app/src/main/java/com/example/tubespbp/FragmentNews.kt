@@ -61,7 +61,7 @@ class FragmentNews : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        queue = Volley.newRequestQueue(requireContext())
         newsAdapter = NewsAdapter(arrayListOf(), object : NewsAdapter.OnAdapterListener {
             override fun onClick(news: News) {
                 news.id?.let { intentEdit(it,Constant.TYPE_READ) }
@@ -79,9 +79,11 @@ class FragmentNews : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = newsAdapter
         }
+        loadData()
         sharedPreferences = this.getActivity()?.getSharedPreferences("login", Context.MODE_PRIVATE)
         val id = sharedPreferences?.getString("id", "-1")
-        getNewsById(id!!.toInt())
+        setupListener()
+//        getNewsById(id!!.toInt())
 //        val user = db?.UserDao()?.getUser(id!!.toInt())
 //        if( user!!.username != "admin" ) {
 //            addbtn.visibility = GONE
@@ -131,8 +133,7 @@ class FragmentNews : Fragment() {
 //        alertDialog.show()
     }
 
-    override fun onStart() {
-        super.onStart()
+    fun loadData() {
         allNews()
     }
 
@@ -164,13 +165,9 @@ class FragmentNews : Fragment() {
         val stringRequest : StringRequest = object :
             StringRequest(Method.GET, NewsAPI.GET_ALL_URL, Response.Listener { response ->
                 val gson = Gson()
-                var news : Array<News> = gson.fromJson(response, Array<News>::class.java)
-
-                if(!news.isEmpty())
-                    Toast.makeText(requireContext(), "Data berhasil diambil!", Toast.LENGTH_SHORT).show()
-                else
-                    Toast.makeText(requireContext(), "Data Kosong", Toast.LENGTH_SHORT).show()
-
+                val jsonObject = JSONObject(response)
+                var news : Array<News> = gson.fromJson(jsonObject.getJSONArray("data").toString(), Array<News>::class.java)
+                newsAdapter.setData(news.toList())
             }, Response.ErrorListener { error ->
                 try {
                     val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
@@ -234,11 +231,6 @@ class FragmentNews : Fragment() {
                     } else {
                         setupListener()
                     }
-                    Toast.makeText(
-                        requireContext(),
-                        "Data berhasil diambil",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 },
                 Response.ErrorListener { error ->
                     try {
