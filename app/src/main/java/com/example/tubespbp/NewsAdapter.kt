@@ -1,11 +1,13 @@
 package com.example.tubespbp
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tubespbp.room.News
+import com.example.tubespbp.Models.News
 import kotlinx.android.synthetic.main.rv_item_news.view.*
 
 class NewsAdapter (private val news: ArrayList<News>,

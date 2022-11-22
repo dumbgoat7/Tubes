@@ -10,21 +10,16 @@ import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.tubespbp.databinding.FragmentMainmenuBinding
-import com.example.tubespbp.databinding.FragmentNewsBinding
-import com.example.tubespbp.room.UserDB
-import com.example.tubespbp.room.UserDao
 
 class FragmentMainMenu : Fragment(R.layout.fragment_mainmenu) {
     private var _binding : FragmentMainmenuBinding? = null
     private val binding get() = _binding!!
-    private lateinit var dao : UserDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ):View? {
 
-        dao = UserDB.getDatabase(requireContext())!!.UserDao()
         _binding = FragmentMainmenuBinding.inflate(inflater, container, false)
         val rootView = binding.root
 
