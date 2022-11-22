@@ -39,22 +39,17 @@ class FragmentProfile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPreferences = this.getActivity()?.getSharedPreferences("login", Context.MODE_PRIVATE)
-        val nameTxt :TextView =  view.findViewById(R.id.etUsername)
-        val emailTxt :TextView =  view.findViewById(R.id.etEmail)
-        val tanggalLahirTxt :TextView =  view.findViewById(R.id.etTglLahir)
-        val noHpTxt :TextView =  view.findViewById(R.id.etNoHp)
+        val nameTxt :TextView =  view.findViewById(R.id.et_Username)
+        val emailTxt :TextView =  view.findViewById(R.id.et_Email)
+        val tanggalLahirTxt :TextView =  view.findViewById(R.id.et_TglLahir)
+        val noHpTxt :TextView =  view.findViewById(R.id.et_NoHp)
         val btnEdit : Button = view.findViewById(R.id.btnEdit)
         val imageButton : ImageView = view.findViewById(R.id.user)
         val id = sharedPreferences?.getString("id", "-1")
         val token = sharedPreferences!!.getString("token", "")
         queue = Volley.newRequestQueue(requireContext())
-        getUserById(id!!.toLong(), token!!, nameTxt, emailTxt)
 
-        val user = db?.UserDao()?.getUser(id!!.toInt())
-        nameTxt.setText(user!!.username)
-        emailTxt.setText(user.email)
-        tanggalLahirTxt.setText(user.tanggallahir)
-        noHpTxt.setText(user.noHp)
+        getUserById(id!!.toLong(), token!!, nameTxt, emailTxt, tanggalLahirTxt, noHpTxt)
 
         btnEdit.setOnClickListener(){
             (activity as HomeActivity).setActivity(EditProfileActivity())
@@ -69,7 +64,7 @@ class FragmentProfile : Fragment() {
 
     }
 
-    private fun getUserById(id: Long, token:String, name:TextView, email :TextView){
+    private fun getUserById(id: Long, token:String, name:TextView, email :TextView, tanggalLahir:TextView, noHp:TextView){
         sharedPreferences = this.getActivity()?.getSharedPreferences("login", Context.MODE_PRIVATE)
         println("id" + id)
 
@@ -80,8 +75,13 @@ class FragmentProfile : Fragment() {
                     val jsonObject = JSONObject(response)
                     val Username = jsonObject.getJSONObject("data").getString("username")
                     val Email = jsonObject.getJSONObject("data").getString("email")
+                    val TanggalLahir = jsonObject.getJSONObject("data").getString("tanggalLahir")
+                    val NoHp = jsonObject.getJSONObject("data").getString("noHp")
                     name.setText(Username)
                     email.setText(Email)
+                    tanggalLahir.setText(TanggalLahir)
+                    noHp.setText(NoHp)
+
                 },
                 Response.ErrorListener{ error ->
 

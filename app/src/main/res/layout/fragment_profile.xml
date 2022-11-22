@@ -52,7 +52,7 @@
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etUsername"
+                    android:id="@+id/et_Username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
@@ -72,7 +72,7 @@
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEmail"
+                    android:id="@+id/et_Email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
@@ -92,7 +92,7 @@
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etTglLahir"
+                    android:id="@+id/et_TglLahir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
@@ -112,7 +112,7 @@
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etNoHp"
+                    android:id="@+id/et_NoHp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"

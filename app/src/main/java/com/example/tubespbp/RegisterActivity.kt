@@ -12,7 +12,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -196,7 +195,7 @@ class RegisterActivity : AppCompatActivity() {
             object: StringRequest(Method.POST, UserAPI.ADD_URL, Response.Listener { response ->
                 val gson = Gson()
                 var profile = gson.fromJson(response,com.example.tubespbp.Models.User::class.java)
-                println(gson)
+                println(profile)
                 if(profile != null)
                     Toast.makeText(this@RegisterActivity, "Register Successfully", Toast.LENGTH_SHORT).show()
 
@@ -205,11 +204,11 @@ class RegisterActivity : AppCompatActivity() {
                 finish()
 
             }, Response.ErrorListener { error ->
-                AlertDialog.Builder(this@RegisterActivity)
-                    .setTitle("Error")
-                    .setMessage(error.message)
-                    .setPositiveButton("OK", null)
-                    .show()
+//                AlertDialog.Builder(this@RegisterActivity)
+//                    .setTitle("Error")
+//                    .setMessage(error.message)
+//                    .setPositiveButton("OK", null)
+//                    .show()
                 try{
                     val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
                     val errors = JSONObject(responseBody)
@@ -240,7 +239,7 @@ class RegisterActivity : AppCompatActivity() {
                     val params = HashMap<String, String>()
                     params["username"] = binding?.layoutUsername?.editText?.getText().toString()
                     params["email"] = binding?.layoutEmail?.editText?.getText().toString()
-                    params["birthdate"] = date.toString()
+                    params["tanggalLahir"] = date.toString()
                     params["noHp"] = binding?.layoutNoHp?.editText?.getText().toString()
                     params["password"] = binding?.layoutPassword?.editText?.getText().toString()
                     return params

@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.AuthFailureError
@@ -16,7 +17,6 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.tubespbp.api.UserAPI
 import com.example.tubespbp.databinding.ActivityEditProfileBinding
-import com.example.tubespbp.room.User
 import com.example.tubespbp.room.UserDB
 import com.google.gson.Gson
 import org.json.JSONObject
@@ -69,45 +69,49 @@ class EditProfileActivity : AppCompatActivity() {
             dpd.show()
         }
 
+        val Name = itemBinding?.ilName?.editText
+        val Email = itemBinding?.ilEmail?.editText
+        val TangalLahir = itemBinding?.etTglLahir
+        val NoTelp = itemBinding?.ilNoHp?.editText
+
+        getUserById(id!!.toLong(), token!!, Name!!, Email!!, TangalLahir!!, NoTelp!!)
 
         itemBinding?.btnSave?.setOnClickListener(View.OnClickListener {
 
             val intent = Intent(this, LoginActivity::class.java)
 
-            val Name: String = itemBinding?.ilName?.editText?.getText().toString()
-            val Email: String = itemBinding?.ilEmail?.editText?.getText().toString()
-            val TangalLahir: String = itemBinding?.etTglLahir?.getText().toString()
-            val NoTelp: String = itemBinding?.ilNoHp?.editText?.getText().toString()
-
             var checkSave = true
 
-            if (Name.isEmpty()) {
+            println("email" + Email.toString())
+
+            if (Name.text.toString().isEmpty()) {
                 itemBinding?.ilName?.setError("Name must be filled with text")
                 checkSave = false
             }
 
-            if (NoTelp.isEmpty()) {
+            if (NoTelp.text.toString().isEmpty()) {
                 itemBinding?.ilNoHp?.setError("Phone Number must be filled with text")
                 checkSave = false
             }
 
-            if (Email.isEmpty()) {
+            if (Email.text.toString().isEmpty()) {
                 itemBinding?.ilEmail?.setError("E-mail must be filled with text")
                 checkSave = false
             }
 
-            if (!Email.matches(Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"))) {
+            if (!Email.text.toString().matches(Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"))) {
                 itemBinding?.ilEmail?.setError("Email tidak valid")
                 checkSave = false
             }
 
-            if (TangalLahir.isEmpty()) {
+            if (TangalLahir.text.toString().isEmpty()) {
                 itemBinding?.etTglLahir?.setError("Birth Date must be filled with text")
                 checkSave = false
             }
 
             if (checkSave == true) {
-                setupListener()
+//                setupListener()
+                updateUser(id!!.toLong())
                 Toast.makeText(
                     applicationContext,
                     "Your Profile Changed",
@@ -122,45 +126,41 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
 
-    private fun setupListener() {
+//    private fun setupListener() {
+//        sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE)
+//        val id = sharedPreferences?.getString("id", "")
+//
+//        db.UserDao().updateUser(
+//            User(
+//                id!!.toInt(),
+//                itemBinding?.etName?.getText().toString(),
+//                itemBinding?.etEmail?.text.toString(),
+//                itemBinding?.etTglLahir?.text.toString(),
+//                itemBinding?.etNoHp?.text.toString(),
+//                db?.UserDao()?.getUser(id!!.toInt())?.password.toString()
+//            )
+//        )
+//        finish()
+//    }
+
+    private fun getUserById(id: Long, token:String, name: TextView, email : TextView, tanggalLahir: TextView, noHp: TextView){
         sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE)
-        val id = sharedPreferences?.getString("id", "")
-
-        db.UserDao().updateUser(
-            User(
-                id!!.toInt(),
-                itemBinding?.etName?.getText().toString(),
-                itemBinding?.etEmail?.text.toString(),
-                itemBinding?.etTglLahir?.text.toString(),
-                itemBinding?.etNoHp?.text.toString(),
-                db?.UserDao()?.getUser(id!!.toInt())?.password.toString()
-            )
-        )
-        finish()
-    }
-
-    private fun getUserById(id: Long, token:String){
-        sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE)
-
-        val Username = itemBinding?.ilName?.editText
-        val Email = itemBinding?.ilEmail?.editText
-        val BirthDate = itemBinding?.etTglLahir
-        val NoTelp = itemBinding?.ilNoHp?.editText
+        println("id" + id)
 
         val stringRequest: StringRequest = object :
             StringRequest(
                 Method.GET, UserAPI.GET_BY_ID_URL + id,
                 { response ->
                     val jsonObject = JSONObject(response)
-                    val username = jsonObject.getJSONObject("data").getString("username")
-                    val noTelp = jsonObject.getJSONObject("data").getString("notelp")
-                    val email = jsonObject.getJSONObject("data").getString("email")
-                    val birthdate = jsonObject.getJSONObject("data").getString("birthdate")
-
-                    Username?.setText(username)
-                    NoTelp?.setText(noTelp)
-                    Email?.setText(email)
-                    BirthDate?.setText(birthdate)
+                    val Username = jsonObject.getJSONObject("data").getString("username")
+                    println("username" + Username)
+                    val Email = jsonObject.getJSONObject("data").getString("email")
+                    val TanggalLahir = jsonObject.getJSONObject("data").getString("tanggalLahir")
+                    val NoHp = jsonObject.getJSONObject("data").getString("noHp")
+                    name.setText(Username)
+                    email.setText(Email)
+                    tanggalLahir.setText(TanggalLahir)
+                    noHp.setText(NoHp)
 
                 },
                 Response.ErrorListener{ error ->
@@ -177,20 +177,20 @@ class EditProfileActivity : AppCompatActivity() {
         queue!!.add(stringRequest)
     }
 
-    private fun updateProfile(id: Long, token :String){
+    private fun updateUser(id: Long){
         sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE)
 
         val Username = itemBinding?.ilName?.editText
         val Email = itemBinding?.ilEmail?.editText
-        val BirthDate = itemBinding?.etTglLahir
+        val TanggalLahir = itemBinding?.etTglLahir
         val NoTelp = itemBinding?.ilNoHp?.editText
 
 
         val user = com.example.tubespbp.Models.User(
             Username?.text.toString(),
-            NoTelp?.text.toString(),
             Email?.text.toString(),
-            BirthDate?.text.toString(),
+            TanggalLahir?.text.toString(),
+            NoTelp?.text.toString(),
             "1"
         )
         val stringRequest: StringRequest =
@@ -221,19 +221,27 @@ class EditProfileActivity : AppCompatActivity() {
                 override fun getHeaders(): Map<String, String> {
                     val headers = HashMap<String, String>()
                     headers["Accept"] = "application/json"
-                    headers["Authorization"] = "Bearer $token"
                     return headers
                 }
 
-                @Throws(AuthFailureError::class)
-                override fun getBody(): ByteArray {
-                    val gson = Gson()
-                    val requestBody = gson.toJson(user)
-                    return requestBody.toByteArray(StandardCharsets.UTF_8)
-                }
+//                @Throws(AuthFailureError::class)
+//                override fun getBody(): ByteArray {
+//                    val gson = Gson()
+//                    val requestBody = gson.toJson(user)
+//                    return requestBody.toByteArray(StandardCharsets.UTF_8)
+//                }
+//
+//                override fun getBodyContentType(): String {
+//                    return "application/json"
+//                }
 
-                override fun getBodyContentType(): String {
-                    return "application/json"
+                override fun getParams(): Map<String, String> {
+                    val params = HashMap<String, String>()
+                    params["username"] = Username?.text.toString()
+                    params["email"] = Email?.text.toString()
+                    params["tanggalLahir"] = TanggalLahir?.text.toString()
+                    params["noHp"] = NoTelp?.text.toString()
+                    return params
                 }
             }
         queue!!.add(stringRequest)

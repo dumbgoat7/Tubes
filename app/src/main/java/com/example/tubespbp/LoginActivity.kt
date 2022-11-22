@@ -6,7 +6,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -20,20 +19,17 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.tubespbp.Models.User
 import com.example.tubespbp.api.UserAPI
-import com.example.tubespbp.room.User
-import com.example.tubespbp.room.UserDB
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 
 class LoginActivity : AppCompatActivity() {
-    val db by lazy { UserDB(this) }
 
     private lateinit var inputUsername: TextInputLayout
     private lateinit var inputPassword: TextInputLayout
@@ -91,27 +87,8 @@ class LoginActivity : AppCompatActivity() {
                 if (!checkLogin) {
                     return@OnClickListener
                 }else {
-                    val userDB: User? = db.UserDao().getLogin(username, password)
-                    loginUser(inputUsername.editText?.text.toString(), inputPassword.editText?.text.toString())
-
                     CoroutineScope(Dispatchers.IO).launch {
-                        if (userDB != null) {
-                            Log.d("MainActivity", "dbResponse: $userDB")
-                            withContext(Dispatchers.Main) {
-
-                                sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE)
-                                var editor = sharedPreferences?.edit()
-                                editor?.putString("id", userDB?.id.toString())
-                                editor?.commit()
-
-                                startActivity(moveHome)
-                            }
-                        } else {
-                            Log.d("MainActivity", "Account doesn't exist")
-                            withContext(Dispatchers.Main){
-                                dialogBuilder()
-                            }
-                        }
+                        loginUser(inputUsername.editText?.text.toString(), inputPassword.editText?.text.toString())
                     }
                 }
         })
@@ -148,26 +125,23 @@ class LoginActivity : AppCompatActivity() {
             object: StringRequest(Method.POST, UserAPI.GET_ALL_URL, Response.Listener { response ->
                 val gson = Gson()
                 val jsonObject = JSONObject(response)
-                val id = jsonObject.getJSONObject("user").getString("id")
-
-
-                var editor = sharedPreferences?.edit()
-                editor?.putString("token", "null")
-                editor?.commit()
-
-                val token : String = jsonObject.getString("access_token")
-
-                if(token != "null") {
-                    Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT)
-                        .show()
-                    sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE)
-                    var editor = sharedPreferences?.edit()
-                    editor?.putString("id",id)
-                    editor?.putString("token", token)
-                    editor?.commit()
-                    val moveMenu = Intent(this, HomeActivity::class.java)
-                    startActivity(moveMenu)
+                val id = jsonObject.getJSONArray("data").toString()
+                var user : Array<User> = gson.fromJson(id, Array<User>::class.java)
+                for (i in user){
+                    if (i.username == username && i.password==password){
+                        sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE)
+                        var editor = sharedPreferences?.edit()
+                        editor?.putString("id", i.id.toString())
+                        editor?.commit()
+                        Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT)
+                            .show()
+                        val moveMenu = Intent(this, HomeActivity::class.java)
+                        startActivity(moveMenu)
+                    }
                 }
+
+                Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT)
+                    .show()
                 val returnIntent = Intent()
                 setResult(RESULT_OK, returnIntent)
                 finish()
