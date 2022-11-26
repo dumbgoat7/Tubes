@@ -1,26 +1,48 @@
 package com.example.tubespbp
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import com.example.tubespbp.databinding.ActivityIntropageBinding
+import me.relex.circleindicator.CircleIndicator3
 
 class IntroPageActivity  : AppCompatActivity()  {
+    private lateinit var binding: ActivityIntropageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intropage)
+        binding = ActivityIntropageBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         supportActionBar?.hide()
 
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.layout_introfragment, IntroPage1Fragment())
-        transaction.addToBackStack(null)
-        transaction.commit()
+//        setContentView(R.layout.activity_intropage)
+
+//        val transaction = supportFragmentManager.beginTransaction()
+//        transaction.replace(R.id.pager, IntroPage1Fragment())
+//        transaction.addToBackStack(null)
+//        transaction.commit()
+
+//        postToList()
+//
+//        pager.adapter = ViewPagerAdapter(titlesList, descList)
+//        pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+//
+
+        binding.pager.adapter = ViewPagerAdapter(this)
+        val indicator = findViewById<CircleIndicator3>(R.id.indicator)
+        indicator.setViewPager(binding.pager)
+//        val adapter = ViewPagerAdapter(this)
+//        val fragsList = listOf(IntroPage1Fragment(), IntroPage2Fragment())
+//        adapter.fragsListHere.addAll(fragsList)
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        if (binding.pager.currentItem == 0) {
+            super.onBackPressed()
+        } else {
+            // Otherwise, select the previous step.
+            binding.pager.currentItem = binding.pager.currentItem - 1
+        }
     }
+
 }

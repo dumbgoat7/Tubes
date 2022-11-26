@@ -7,22 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.airbnb.lottie.LottieDrawable
+import com.example.tubespbp.databinding.FragmentIntropage2Binding
 
 
 class IntroPage2Fragment : Fragment(){
-    private lateinit var start : TextView
+    private lateinit var binding : FragmentIntropage2Binding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_intropage2, container, false)
+        binding = FragmentIntropage2Binding.inflate(inflater, container, false)
+        val rootView = binding.root
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        start = view.findViewById(R.id.startText)
 
-        start.setOnClickListener {
+
+        binding.startText.setOnClickListener {
             val intent = Intent(activity, LoginActivity::class.java)
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction!!.remove(this)
@@ -31,4 +36,6 @@ class IntroPage2Fragment : Fragment(){
             startActivity(intent)
         }
     }
+
+
 }

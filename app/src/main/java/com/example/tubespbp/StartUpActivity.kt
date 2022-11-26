@@ -21,8 +21,8 @@ class StartUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         sharedPreferences = getSharedPreferences("first_time", Context.MODE_PRIVATE)
-        val isFirstTimeOpened = sharedPreferences.getBoolean("first_time", true)
-
+//        val isFirstTimeOpened = sharedPreferences.getBoolean("first_time", true)
+        val isFirstTimeOpened = true
 
         if(isFirstTimeOpened) {
             setContentView(R.layout.activity_startup)
@@ -33,10 +33,10 @@ class StartUpActivity : AppCompatActivity() {
             logo.startAnimation(splash)
             text.startAnimation(splash)
 
-            sharedPreferences
-                .edit()
-                .putBoolean("first_time", false)
-                .apply()
+//            sharedPreferences
+//                .edit()
+//                .putBoolean("first_time", false)
+//                .apply()
 
             Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(this, IntroPageActivity::class.java)

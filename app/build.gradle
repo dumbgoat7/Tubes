@@ -70,4 +70,10 @@ dependencies {
 
     //Gson
     implementation'com.google.code.gson:gson:2.8.8'
+    //View Pager
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    //Paging Indicator
+    implementation 'me.relex:circleindicator:2.1.6'
+    //Animated icon using json
+    implementation 'com.airbnb.android:lottie:3.4.1'
 }

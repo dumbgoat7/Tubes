@@ -40,6 +40,7 @@
         android:layout_below="@id/hiasan1"
         android:layout_marginStart="27dp"
         android:layout_marginEnd="27dp"
+        android:layout_marginTop="50dp"
         android:text="Selamat Datang \n di Healthy-U"
         android:textAlignment="center"
         android:textColor="@color/black" />
@@ -52,31 +53,28 @@
         android:layout_below="@id/welcomeText"
         android:layout_marginStart="27dp"
         android:layout_marginEnd="27dp"
+        android:layout_marginTop="20dp"
         android:alpha="0.5"
         android:text="Kami bertekad untuk membantu Anda dalam meningkatkan kualitas kesehatan Anda"
         android:textAlignment="center"
         android:textColor="@color/black" />
 
-    <ImageButton
-        android:id="@+id/btn1"
-        android:layout_width="166dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/desc1"
+    <TextView
+        android:id="@+id/skipText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/white"
-        android:elevation="10dp"
-        android:background="@drawable/bg_shapebutton"
-        android:src="@drawable/hiasan5"/>
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="30dp"
+        android:layout_toLeftOf="@id/hiasan2"
+        android:text="Skip"
+        android:textAlignment="center"
+        android:textColor="#00B4D8"
+        android:textSize="15sp" />
 
-    <ImageView
-        android:id="@+id/hiasan4"
-        android:layout_width="89dp"
-        android:layout_height="4dp"
-        android:layout_below="@id/btn1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/hiasan4" />
 
 
 
