@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.airbnb.lottie.LottieDrawable
 import com.example.tubespbp.databinding.FragmentIntropage2Binding
 
 
@@ -28,8 +26,11 @@ class IntroPage2Fragment : Fragment(){
 
 
         binding.startText.setOnClickListener {
-            val intent = Intent(activity, LoginActivity::class.java)
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
+
+            val myActivity = requireActivity()
+
+            val intent = Intent(myActivity, LoginActivity::class.java)
+            val transaction = myActivity?.supportFragmentManager?.beginTransaction()
             transaction!!.remove(this)
             transaction.commit()
 

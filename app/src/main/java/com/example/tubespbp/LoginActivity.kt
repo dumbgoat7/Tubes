@@ -142,8 +142,12 @@ class LoginActivity : AppCompatActivity() {
                         editor?.commit()
                         Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT)
                             .show()
+
+                        println("")
+
                         val moveMenu = Intent(this, HomeActivity::class.java)
                         startActivity(moveMenu)
+                        finish()
                     }
                 }
 
@@ -151,7 +155,6 @@ class LoginActivity : AppCompatActivity() {
                     .show()
                 val returnIntent = Intent()
                 setResult(RESULT_OK, returnIntent)
-                finish()
 
             }, Response.ErrorListener { error ->
 //                AlertDialog.Builder(applicationContext)
