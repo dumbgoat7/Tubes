@@ -87,6 +87,8 @@ class LoginActivity : AppCompatActivity() {
                 if (!checkLogin) {
                     return@OnClickListener
                 }else {
+                    println("sudah masuk sini")
+
                     CoroutineScope(Dispatchers.IO).launch {
                         loginUser(inputUsername.editText?.text.toString(), inputPassword.editText?.text.toString())
                     }
@@ -121,8 +123,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUser(username: String, password: String){
 
+        println("sudah masuk sini 2")
+        println(username)
+        println(password)
+
         val stringRequest: StringRequest =
-            object: StringRequest(Method.POST, UserAPI.GET_ALL_URL, Response.Listener { response ->
+            object: StringRequest(Method.GET, UserAPI.GET_ALL_URL, Response.Listener { response ->
                 val gson = Gson()
                 val jsonObject = JSONObject(response)
                 val id = jsonObject.getJSONArray("data").toString()
@@ -131,6 +137,7 @@ class LoginActivity : AppCompatActivity() {
                     if (i.username == username && i.password==password){
                         sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE)
                         var editor = sharedPreferences?.edit()
+                        println(id)
                         editor?.putString("id", i.id.toString())
                         editor?.commit()
                         Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT)

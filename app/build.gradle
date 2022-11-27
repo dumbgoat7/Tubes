@@ -43,6 +43,8 @@ android {
 
 dependencies {
 
+
+
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
@@ -81,6 +83,7 @@ dependencies {
 
     //implementasi PDF Library IText
     implementation 'com.itextpdf:itext7-core:7.1.13'
+
     //implementasi QR Code Scanner
     implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
     //implementasi QR CODE GENERATE
