@@ -33,9 +33,11 @@ android {
         jvmTarget = '1.8'
 
     }
-
     buildFeatures {
         viewBinding = true
+    }
+    viewBinding{
+        enabled = true
     }
 }
 
@@ -76,4 +78,14 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.6'
     //Animated icon using json
     implementation 'com.airbnb.android:lottie:3.4.1'
+
+    //implementasi PDF Library IText
+    implementation 'com.itextpdf:itext7-core:7.1.13'
+    //implementasi QR Code Scanner
+    implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
+    //implementasi QR CODE GENERATE
+    implementation 'com.github.kenglxn.qrgen:android:2.6.0'
+    implementation 'com.google.mlkit:barcode-scanning:17.0.2'
+    //implementasi PDF Library OpenPDF
+    implementation 'com.github.librepdf:openpdf:1.3.29'
 }

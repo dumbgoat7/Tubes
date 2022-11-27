@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.ic_scan-> {
-                    val intent = Intent(this, CameraActivity::class.java)
+                    val intent = Intent(this, QRActivity::class.java)
                     startActivity(intent)
                     true
                 }
