@@ -81,6 +81,9 @@ dependencies {
     //Animated icon using json
     implementation 'com.airbnb.android:lottie:3.4.1'
 
+    //klaxon
+    implementation 'com.beust:klaxon:5.5'
+
     //implementasi PDF Library IText
     implementation 'com.itextpdf:itext7-core:7.1.13'
 

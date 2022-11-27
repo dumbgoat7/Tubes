@@ -17,6 +17,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.beust.klaxon.Klaxon
+import com.example.tubespbp.Models.User
 import com.example.tubespbp.api.UserAPI
 import com.example.tubespbp.room.UserDB
 import com.google.gson.Gson
@@ -73,14 +75,21 @@ class FragmentProfile : Fragment() {
                 Method.GET, UserAPI.GET_BY_ID_URL + id,
                 { response ->
                     val jsonObject = JSONObject(response)
-                    val Username = jsonObject.getJSONObject("data").getString("username")
-                    val Email = jsonObject.getJSONObject("data").getString("email")
-                    val TanggalLahir = jsonObject.getJSONObject("data").getString("tanggalLahir")
-                    val NoHp = jsonObject.getJSONObject("data").getString("noHp")
-                    name.setText(Username)
-                    email.setText(Email)
-                    tanggalLahir.setText(TanggalLahir)
-                    noHp.setText(NoHp)
+                    
+                    val user = Klaxon().parse<User>("""
+                        {
+                            "username" : "${jsonObject.getJSONObject("data").getString("username")}",
+                            "email" : "${jsonObject.getJSONObject("data").getString("email")}",
+                            "tanggalLahir" : "${jsonObject.getJSONObject("data").getString("tanggalLahir")}",
+                            "noHp" : "${jsonObject.getJSONObject("data").getString("noHp")}",
+                            "password" : ""
+                        }
+                    """.trimIndent())!!
+
+                    name.setText(user.username)
+                    email.setText(user.email)
+                    tanggalLahir.setText(user.tanggalLahir)
+                    noHp.setText(user.noHp)
 
                 },
                 Response.ErrorListener{ error ->
