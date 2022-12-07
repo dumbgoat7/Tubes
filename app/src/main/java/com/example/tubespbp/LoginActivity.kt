@@ -139,6 +139,8 @@ class LoginActivity : AppCompatActivity() {
                         var editor = sharedPreferences?.edit()
                         println(id)
                         editor?.putString("id", i.id.toString())
+                        editor?.putString("username", i.username)
+                        editor?.putBoolean("isLogin",true)
                         editor?.commit()
                         Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT)
                             .show()
@@ -151,17 +153,13 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
 
-                Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT)
+//                    .show()
                 val returnIntent = Intent()
                 setResult(RESULT_OK, returnIntent)
 
             }, Response.ErrorListener { error ->
-//                AlertDialog.Builder(applicationContext)
-//                    .setTitle("Error")
-//                    .setMessage(error.message)
-//                    .setPositiveButton("OK", null)
-//                    .show()
+
                 Toast.makeText(this@LoginActivity, "Username/Password incorrect", Toast.LENGTH_SHORT)
                     .show()
             }){

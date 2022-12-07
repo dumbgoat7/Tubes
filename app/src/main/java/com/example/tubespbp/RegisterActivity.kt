@@ -22,7 +22,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.tubespbp.api.UserAPI
 import com.example.tubespbp.databinding.ActivityRegisterBinding
-import com.example.tubespbp.room.User
+import com.example.tubespbp.Models.User
 import com.example.tubespbp.room.UserDB
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_register.*
@@ -116,7 +116,7 @@ class RegisterActivity : AppCompatActivity() {
 
             if(checkRegister == true) {
 
-                val user = User(0, username, email, tanggalLahir, noHp, password)
+//                val user = User(0, username, email, tanggalLahir, noHp, password)
                 CoroutineScope(Dispatchers.IO).launch{
                     userCheck()
                     finish()
@@ -194,9 +194,9 @@ class RegisterActivity : AppCompatActivity() {
         val stringRequest: StringRequest =
             object: StringRequest(Method.POST, UserAPI.ADD_URL, Response.Listener { response ->
                 val gson = Gson()
-                var profile = gson.fromJson(response,com.example.tubespbp.Models.User::class.java)
-                println(profile)
-                if(profile != null)
+                var user = gson.fromJson(response,User::class.java)
+//                println(profile)
+                if(user != null)
                     Toast.makeText(this@RegisterActivity, "Register Successfully", Toast.LENGTH_SHORT).show()
 
                 val returnIntent = Intent()

@@ -39,7 +39,6 @@ import java.util.HashMap
 
 class FragmentNews : Fragment() {
     val db by lazy{activity?.let { UserDB(it)}  }
-    private lateinit var dao : NewsDao
     lateinit var newsAdapter: NewsAdapter
 
     private var queue: RequestQueue? = null
@@ -64,11 +63,11 @@ class FragmentNews : Fragment() {
         queue = Volley.newRequestQueue(requireContext())
         newsAdapter = NewsAdapter(arrayListOf(), object : NewsAdapter.OnAdapterListener {
             override fun onClick(news: News) {
-                news.id?.let { intentEdit(it,Constant.TYPE_READ) }
+                news.id?.let { it-> intentEdit(it,Constant.TYPE_READ) }
             }
 
             override fun onUpdate(news: News) {
-                news.id?.let { intentEdit(it,Constant.TYPE_UPDATE) }
+                news.id?.let { it-> intentEdit(it,Constant.TYPE_UPDATE) }
             }
 
             override fun onDelete(news: News) {
@@ -80,19 +79,7 @@ class FragmentNews : Fragment() {
             adapter = newsAdapter
         }
         loadData()
-        sharedPreferences = this.getActivity()?.getSharedPreferences("login", Context.MODE_PRIVATE)
-        val id = sharedPreferences?.getString("id", "-1")
         setupListener()
-//        getNewsById(id!!.toInt())
-//        val user = db?.UserDao()?.getUser(id!!.toInt())
-//        if( user!!.username != "admin" ) {
-//            addbtn.visibility = GONE
-//            //list_news!!.icon_edit.visibility = GONE
-//            //list_news!!.icon_delete.visibility = GONE
-//
-//        } else {
-//            setupListener()
-//        }
 
     }
 
@@ -115,37 +102,13 @@ class FragmentNews : Fragment() {
                 }
             }
             .show()
-//        val alertDialog = AlertDialog.Builder(view.context)
-//        alertDialog.apply {
-//            setTitle("Confirmation")
-//            setMessage("Are You Sure to delete this data From ${news.judul}?")
-//            setNegativeButton("Cancel", DialogInterface.OnClickListener { dialogInterface, i ->
-//                dialogInterface.dismiss()
-//            })
-//            setPositiveButton("Delete", DialogInterface.OnClickListener { dialogInterface, i ->
-//                dialogInterface.dismiss()
-//                CoroutineScope(Dispatchers.IO).launch {
-//                    dao.deleteNews(news)
-//                    loadData()
-//                }
-//            })
-//        }
-//        alertDialog.show()
     }
 
-    fun loadData() {
-        allNews()
+    fun loadData(){
+        CoroutineScope(Dispatchers.IO).launch {
+            allNews()
+        }
     }
-
-//    fun loadData(){
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val notes = dao.getAllNews()
-//            Log.d("NewsFragment","dbResponse: $notes")
-//            withContext(Dispatchers.Main){
-//                newsAdapter.setData( notes )
-//            }
-//        }
-//    }
 
     fun setupListener() {
         addbtn.setOnClickListener{
@@ -191,7 +154,7 @@ class FragmentNews : Fragment() {
         queue!!.add(stringRequest)
     }
 
-    fun deleteNews(id: Int) {
+    private fun deleteNews(id: Int) {
         val stringRequest : StringRequest = object :
             StringRequest(Method.DELETE, NewsAPI.DELETE_URL + id, Response.Listener {response ->
                 val gson = Gson()

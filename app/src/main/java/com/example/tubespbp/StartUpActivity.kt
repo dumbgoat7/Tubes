@@ -21,8 +21,8 @@ class StartUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         sharedPreferences = getSharedPreferences("first_time", Context.MODE_PRIVATE)
-//        val isFirstTimeOpened = sharedPreferences.getBoolean("first_time", true)
-        val isFirstTimeOpened = true
+        val isFirstTimeOpened = sharedPreferences.getBoolean("first_time", true)
+//        val isFirstTimeOpened = true
 
         if(isFirstTimeOpened) {
             setContentView(R.layout.activity_startup)
