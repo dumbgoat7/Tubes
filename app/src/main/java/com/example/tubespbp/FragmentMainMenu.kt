@@ -27,8 +27,7 @@ class FragmentMainMenu : Fragment(R.layout.fragment_mainmenu) {
             builder.setMessage("Do you want to exit?")
             builder.setPositiveButton("OK", object:DialogInterface.OnClickListener{
                 override fun onClick(dialogInterface: DialogInterface, i: Int) {
-                    val intent = Intent ( getActivity(), LoginActivity::class.java)
-                    getActivity()?.onBackPressed()
+                    val intent = Intent ( requireContext(), LoginActivity::class.java)
                     startActivity(intent)
                 }
             })

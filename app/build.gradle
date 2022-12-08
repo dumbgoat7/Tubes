@@ -107,4 +107,8 @@ dependencies {
 
     // Optional -- UI testing with UI Automator
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+
+    def fragment_version = "1.5.5"
+
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
 }

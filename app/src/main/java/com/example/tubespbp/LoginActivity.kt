@@ -28,7 +28,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
-
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var inputUsername: TextInputLayout
@@ -37,10 +36,9 @@ class LoginActivity : AppCompatActivity() {
 
     lateinit var regUser: String
     lateinit var regPass: String
-
     private var queue: RequestQueue? = null
 
-    var sharedPreferences: SharedPreferences? = null
+    private lateinit var sharedPreferences: SharedPreferences
 
     var mBundle: Bundle? = null
 
@@ -53,6 +51,9 @@ class LoginActivity : AppCompatActivity() {
         sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE)
         val token = sharedPreferences?.getString("token", "")
         println(token!!)
+
+//
+
         queue = Volley.newRequestQueue(this)
 
         inputUsername = findViewById(R.id.inputLayoutUsername)
@@ -126,6 +127,7 @@ class LoginActivity : AppCompatActivity() {
         println("sudah masuk sini 2")
         println(username)
         println(password)
+        var isLogin = -1
 
         val stringRequest: StringRequest =
             object: StringRequest(Method.GET, UserAPI.GET_ALL_URL, Response.Listener { response ->
@@ -140,8 +142,9 @@ class LoginActivity : AppCompatActivity() {
                         println(id)
                         editor?.putString("id", i.id.toString())
                         editor?.putString("username", i.username)
-                        editor?.putBoolean("isLogin",true)
+                        isLogin = 1
                         editor?.commit()
+
                         Toast.makeText(this@LoginActivity, "Login Successfully", Toast.LENGTH_SHORT)
                             .show()
 
@@ -152,16 +155,18 @@ class LoginActivity : AppCompatActivity() {
                         finish()
                     }
                 }
-
-//                Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT)
-//                    .show()
+                if (isLogin == -1 ) {
+                    Toast.makeText(this@LoginActivity, "Username/Password incorrect", Toast.LENGTH_SHORT)
+                    .show()
+                }
+//
                 val returnIntent = Intent()
                 setResult(RESULT_OK, returnIntent)
 
             }, Response.ErrorListener { error ->
+                Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT)
+                .show()
 
-                Toast.makeText(this@LoginActivity, "Username/Password incorrect", Toast.LENGTH_SHORT)
-                    .show()
             }){
                 @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {

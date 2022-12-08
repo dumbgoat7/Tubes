@@ -14,7 +14,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
@@ -23,38 +22,35 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class LoginActivityTest {
+class EditNewsActivityTest {
 
     @Rule
     @JvmField
-    var mActivityScenarioRule = ActivityScenarioRule(LoginActivity::class.java)
+    var mActivityScenarioRule = ActivityScenarioRule(EditNewsActivity::class.java)
 
     @Test
-    fun loginActivityTest() {
+    fun editNewsActivityTest() {
         val materialButton = onView(
             allOf(
-                withId(R.id.btnLogin), withText("Login"),
+                withId(R.id.button_save), withText("SAVE"),
                 childAtPosition(
-                    allOf(
-                        withId(R.id.linearLayout2),
-                        childAtPosition(
-                            withId(R.id.loginactivity),
-                            4
-                        )
+                    childAtPosition(
+                        withId(android.R.id.content),
+                        0
                     ),
-                    0
+                    2
                 ),
                 isDisplayed()
             )
         )
         materialButton.perform(click())
-        onView(isRoot()).perform(waitFor(7000))
 
-        val textInputEditText = onView(
+        val appCompatEditText = onView(
             allOf(
+                withId(R.id.edit_title),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.inputLayoutUsername),
+                        withId(android.R.id.content),
                         0
                     ),
                     0
@@ -62,98 +58,54 @@ class LoginActivityTest {
                 isDisplayed()
             )
         )
-        textInputEditText.perform(click())
-
-        val textInputEditText2 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.inputLayoutUsername),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textInputEditText2.perform(click())
-
-        val textInputEditText3 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.inputLayoutUsername),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textInputEditText3.perform(replaceText("admin"), closeSoftKeyboard())
-
-        val textInputEditText4 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.inputLayoutPassword),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textInputEditText4.perform(click())
-
-        val textInputEditText5 = onView(
-            allOf(
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.inputLayoutPassword),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textInputEditText5.perform(replaceText("admin123"), closeSoftKeyboard())
-
-//        val checkableImageButton = onView(
-//            allOf(
-//                withId(com.google.android.material.R.id.text_input_end_icon),
-//                withContentDescription("Show password"),
-//                childAtPosition(
-//                    childAtPosition(
-//                        withClassName(`is`("android.widget.LinearLayout")),
-//                        1
-//                    ),
-//                    0
-//                ),
-//                isDisplayed()
-//            )
-//        )
-//        checkableImageButton.perform(click())
+        appCompatEditText.perform(replaceText("ngeng"), closeSoftKeyboard())
 
         val materialButton2 = onView(
             allOf(
-                withId(R.id.btnLogin), withText("Login"),
+                withId(R.id.button_save), withText("SAVE"),
                 childAtPosition(
-                    allOf(
-                        withId(R.id.linearLayout2),
-                        childAtPosition(
-                            withId(R.id.loginactivity),
-                            4
-                        )
+                    childAtPosition(
+                        withId(android.R.id.content),
+                        0
                     ),
-                    0
+                    2
                 ),
                 isDisplayed()
             )
         )
         materialButton2.perform(click())
-        onView(isRoot()).perform(waitFor(11000))
+        onView(isRoot()).perform(waitFor(5000))
+
+        val appCompatEditText2 = onView(
+            allOf(
+                withId(R.id.edit_note),
+                childAtPosition(
+                    childAtPosition(
+                        withId(android.R.id.content),
+                        0
+                    ),
+                    1
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatEditText2.perform(replaceText("ngengngeng"), closeSoftKeyboard())
+
+        val materialButton3 = onView(
+            allOf(
+                withId(R.id.button_save), withText("SAVE"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(android.R.id.content),
+                        0
+                    ),
+                    2
+                ),
+                isDisplayed()
+            )
+        )
+        materialButton3.perform(click())
+        onView(isRoot()).perform(waitFor(5000))
     }
 
     private fun childAtPosition(
@@ -173,7 +125,6 @@ class LoginActivityTest {
             }
         }
     }
-
     fun waitFor(delay: Long): ViewAction? {
         return object : ViewAction {
             override fun getConstraints(): Matcher<View> {

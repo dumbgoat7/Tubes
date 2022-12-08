@@ -56,23 +56,35 @@
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true" />
+            android:exported="true" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />
         <activity
             android:name=".HomeActivity"
-            android:exported="true" />
+            android:exported="true" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
         <activity
             android:name=".EditProfileActivity"
             android:exported="true" />
         <activity
             android:name=".EditNewsActivity"
-            android:exported="true" />
+            android:exported="true" >
+            <meta-data
+                    android:name="android.app.lib_name"
+                    android:value="" />
+        </activity>
         <activity
             android:name=".IntroPageActivity"
             android:exported="true" />
-
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="true">

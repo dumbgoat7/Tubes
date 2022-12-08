@@ -23,38 +23,20 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class LoginActivityTest {
+class RegisterActivityTest {
 
     @Rule
     @JvmField
-    var mActivityScenarioRule = ActivityScenarioRule(LoginActivity::class.java)
+    var mActivityScenarioRule = ActivityScenarioRule(RegisterActivity::class.java)
 
     @Test
-    fun loginActivityTest() {
-        val materialButton = onView(
-            allOf(
-                withId(R.id.btnLogin), withText("Login"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.linearLayout2),
-                        childAtPosition(
-                            withId(R.id.loginactivity),
-                            4
-                        )
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        materialButton.perform(click())
-        onView(isRoot()).perform(waitFor(7000))
-
+    fun registerActivityTest() {
         val textInputEditText = onView(
             allOf(
+                withId(R.id.etUsername),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.inputLayoutUsername),
+                        withId(R.id.layoutUsername),
                         0
                     ),
                     0
@@ -62,13 +44,14 @@ class LoginActivityTest {
                 isDisplayed()
             )
         )
-        textInputEditText.perform(click())
+        textInputEditText.perform(replaceText("yaya"), closeSoftKeyboard())
 
         val textInputEditText2 = onView(
             allOf(
+                withId(R.id.etEmail),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.inputLayoutUsername),
+                        withId(R.id.layoutEmail),
                         0
                     ),
                     0
@@ -76,13 +59,14 @@ class LoginActivityTest {
                 isDisplayed()
             )
         )
-        textInputEditText2.perform(click())
+        textInputEditText2.perform(replaceText("sayamember@member.com"), closeSoftKeyboard())
 
         val textInputEditText3 = onView(
             allOf(
+                withId(R.id.etTglLahir),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.inputLayoutUsername),
+                        withId(R.id.layoutTanggalLahir),
                         0
                     ),
                     0
@@ -90,13 +74,30 @@ class LoginActivityTest {
                 isDisplayed()
             )
         )
-        textInputEditText3.perform(replaceText("admin"), closeSoftKeyboard())
+        textInputEditText3.perform(replaceText("11/11/1111"), closeSoftKeyboard())
+
+//        val materialButton = onView(
+//            allOf(
+//                withId(android.R.id.button1), withText("OK"),
+//                childAtPosition(
+//                    childAtPosition(
+//                        withClassName(`is`("android.widget.ScrollView")),
+//                        0
+//                    ),
+//                    3
+//                )
+//            )
+//        )
+//        materialButton.perform(scrollTo(), click())
+        onView(isRoot()).perform(waitFor(5000))
+
 
         val textInputEditText4 = onView(
             allOf(
+                withId(R.id.etNoHp),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.inputLayoutPassword),
+                        withId(R.id.layoutNoHp),
                         0
                     ),
                     0
@@ -104,13 +105,14 @@ class LoginActivityTest {
                 isDisplayed()
             )
         )
-        textInputEditText4.perform(click())
+        textInputEditText4.perform(replaceText("112233445566"), closeSoftKeyboard())
 
         val textInputEditText5 = onView(
             allOf(
+                withId(R.id.etPass),
                 childAtPosition(
                     childAtPosition(
-                        withId(R.id.inputLayoutPassword),
+                        withId(R.id.layoutPassword),
                         0
                     ),
                     0
@@ -118,32 +120,16 @@ class LoginActivityTest {
                 isDisplayed()
             )
         )
-        textInputEditText5.perform(replaceText("admin123"), closeSoftKeyboard())
-
-//        val checkableImageButton = onView(
-//            allOf(
-//                withId(com.google.android.material.R.id.text_input_end_icon),
-//                withContentDescription("Show password"),
-//                childAtPosition(
-//                    childAtPosition(
-//                        withClassName(`is`("android.widget.LinearLayout")),
-//                        1
-//                    ),
-//                    0
-//                ),
-//                isDisplayed()
-//            )
-//        )
-//        checkableImageButton.perform(click())
+        textInputEditText5.perform(replaceText("memberya"), closeSoftKeyboard())
 
         val materialButton2 = onView(
             allOf(
-                withId(R.id.btnLogin), withText("Login"),
+                withId(R.id.btnRegister), withText("Daftar"),
                 childAtPosition(
                     allOf(
                         withId(R.id.linearLayout2),
                         childAtPosition(
-                            withId(R.id.loginactivity),
+                            withId(R.id.registerActivity),
                             4
                         )
                     ),
@@ -153,7 +139,7 @@ class LoginActivityTest {
             )
         )
         materialButton2.perform(click())
-        onView(isRoot()).perform(waitFor(11000))
+        onView(isRoot()).perform(waitFor(5000))
     }
 
     private fun childAtPosition(
@@ -173,7 +159,6 @@ class LoginActivityTest {
             }
         }
     }
-
     fun waitFor(delay: Long): ViewAction? {
         return object : ViewAction {
             override fun getConstraints(): Matcher<View> {

@@ -37,12 +37,13 @@ class EditNewsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_news)
-        newsId = intent.getIntExtra("intent_id",0)
+//        newsId = intent.getIntExtra("intent_id",0)
         queue = Volley.newRequestQueue(this)
         createNotificationChannel()
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        val intentType = intent.getIntExtra("intent_type",0)
+//        val intentType = intent.getIntExtra("intent_type",1)
+        val intentType = 1
         when (intentType) {
             Constant.TYPE_CREATE -> {
                 button_update.visibility = View.GONE

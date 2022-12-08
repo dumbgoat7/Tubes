@@ -33,10 +33,10 @@ class StartUpActivity : AppCompatActivity() {
             logo.startAnimation(splash)
             text.startAnimation(splash)
 
-//            sharedPreferences
-//                .edit()
-//                .putBoolean("first_time", false)
-//                .apply()
+            sharedPreferences
+                .edit()
+                .putBoolean("first_time", false)
+                .apply()
 
             Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(this, IntroPageActivity::class.java)
