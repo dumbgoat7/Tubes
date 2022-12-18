@@ -53,6 +53,12 @@ class FragmentMainMenu : Fragment(R.layout.fragment_mainmenu) {
             transaction.addToBackStack(null)
             transaction.commit()
         }
+        binding.vaccinebtn.setOnClickListener{
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction!!.replace(R.id.layout_fragment, FragmentVaccination())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
         return rootView
     }
 
