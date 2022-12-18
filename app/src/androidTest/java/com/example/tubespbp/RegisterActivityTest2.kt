@@ -56,7 +56,7 @@ class RegisterActivityTest2 {
                 isDisplayed()
             )
         )
-        textInputEditText2.perform(replaceText("mantapu"), closeSoftKeyboard())
+        textInputEditText2.perform(replaceText("mantapuu"), closeSoftKeyboard())
 
         val textInputEditText3 = onView(
             allOf(
@@ -71,7 +71,7 @@ class RegisterActivityTest2 {
                 isDisplayed()
             )
         )
-        textInputEditText3.perform(replaceText("mantapu@mantap.com"), closeSoftKeyboard())
+        textInputEditText3.perform(replaceText("mantapuu@mantap.com"), closeSoftKeyboard())
 
         val textInputEditText4 = onView(
             allOf(

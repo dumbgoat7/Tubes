@@ -49,7 +49,7 @@ class VaccinationAddEditActivity : AppCompatActivity() {
         setContentView(view)
         queue = Volley.newRequestQueue(this)
         sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.hide()
         VaccinationId = intent.getIntExtra("intent_id",0)
 
         binding.inputTanggalVaksin.setOnClickListener{
